@@ -7,7 +7,7 @@
     "eject": "expo eject",
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
     "lint": "eslint *.js **/*.js",
-    "restart": "watchman watch-del-all && yarn clean:all && yarn start"
+    "reset": "watchman watch-del-all && yarn cache clean"
   },
   "jest": {
     "preset": "jest-expo"
@@ -15,9 +15,14 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-native": "^3.7.0",
     "expo": "^32.0.0",
+    "prop-types": "^15.7.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-navigation": "^3.0.9"

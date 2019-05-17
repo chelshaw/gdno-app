@@ -5,10 +5,12 @@
     "jest": true,
   },
   "rules": {
-    "no-use-before-define": "on",
-    "react/jsx-filename-extension": "off",
+    "no-use-before-define": 2,
     "react/prop-types": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "react/jsx-filename-extension": "off",
+    "react/destructuring-assignment": "off",
+    "react/require-default-props": "warn"
   },
   "globals": {
     "fetch": false
