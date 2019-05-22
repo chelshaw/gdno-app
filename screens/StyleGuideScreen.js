@@ -43,16 +43,43 @@ const styles = StyleSheet.create({
   typographyContainer: {
     padding: 10,
   },
+  multipleButtonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    marginBottom: 20,
+  },
+  buttonSetChild: {
+    flexGrow: 1,
+    paddingVertical: 40,
+    paddingHorizontal: 10,
+  }
 });
 
 export default class StyleGuideScreen extends React.Component {
+  state = {
+    active: 'first',
+    active2: 'old',
+  };
+
   handleButtonClick = () => {
     // Handling goes here
+  };
+
+  handleButtonSetPress = (active) => {
+    this.setState({ active });
+  }
+
+  handleTypeSetPress = (active2) => {
+    this.setState({ active2 });
   }
 
   render() {
+    const { active, active2 } = this.state;
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Header>Buttons</Header>
         {semanticColors.map(color => (
           <View style={styles.buttonContainer} key={`btn-${color}`}>
             <Button color={color} onPress={this.handleButtonClick}>
@@ -60,6 +87,7 @@ export default class StyleGuideScreen extends React.Component {
             </Button>
           </View>
         ))}
+        <Header>Inverted Buttons</Header>
         {semanticColors.map(color => (
           <View style={styles.buttonContainer} key={`btn-inverted-${color}`}>
             <Button inverted color={color} onPress={this.handleButtonClick}>
@@ -67,6 +95,7 @@ export default class StyleGuideScreen extends React.Component {
             </Button>
           </View>
         ))}
+        <Header>Disabled Buttons</Header>
         <View style={styles.buttonContainer}>
           <Button disabled onPress={this.handleButtonClick}>
             Ack! Disabled!
@@ -75,6 +104,27 @@ export default class StyleGuideScreen extends React.Component {
             Disabled Button!
           </Button>
         </View>
+        <Header>Button Set</Header>
+        <View style={styles.multipleButtonContainer}>
+          <Button style={styles.buttonSetChild} onPress={() => this.handleTypeSetPress('new')} inverted={active2 === 'new'}>
+            I&apos;m a new grower
+          </Button>
+          <Button style={styles.buttonSetChild} onPress={() => this.handleTypeSetPress('old')} inverted={active2 === 'old'}>
+            I&apos;ve done this before
+          </Button>
+        </View>
+        <View style={styles.multipleButtonContainer}>
+          <Button style={styles.buttonSetChild} onPress={() => this.handleButtonSetPress('first')} inverted={active === 'first'}>
+            First
+          </Button>
+          <Button style={styles.buttonSetChild} onPress={() => this.handleButtonSetPress('second')} inverted={active === 'second'}>
+            Second
+          </Button>
+          <Button style={styles.buttonSetChild} onPress={() => this.handleButtonSetPress('third')} inverted={active === 'third'}>
+            Third
+          </Button>
+        </View>
+        <Header>Typography</Header>
         <View style={styles.typographyContainer}>
           <Header>Header</Header>
           <DetailHeader>DetailHeader</DetailHeader>

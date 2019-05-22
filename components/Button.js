@@ -18,22 +18,23 @@ const Button = ({
   children,
   inverted = false,
   disabled = false,
+  style,
 }) => {
   const buttonColor = disabled ? 'lightGray' : color;
-  const style = StyleSheet.create({
+  const ss = StyleSheet.create({
     buttonStyle: {
-      backgroundColor: inverted ? COLORS.white : COLORS[buttonColor],
       paddingVertical: 10,
       paddingHorizontal: 10,
-      borderWidth: inverted ? 2 : 0,
-      borderColor: inverted ? COLORS[buttonColor] : 'transparent',
+      borderWidth: 2,
+      borderColor: COLORS[buttonColor],
+      ...style,
+      backgroundColor: inverted ? COLORS.white : COLORS[buttonColor],
     }
   });
   const accessibilityLabelText = accessibilityLabel || children;
   const accessibilityStates = disabled ? ['disabled'] : [];
   const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   let textColor = 'white';
-  if (disabled) textColor = 'medGray';
   if (inverted) textColor = buttonColor;
   return (
     <Touchable
@@ -43,7 +44,7 @@ const Button = ({
       accessibilityRole="button"
       accessibilityStates={accessibilityStates}
     >
-      <View style={style.buttonStyle}>
+      <View style={ss.buttonStyle}>
         <ButtonText color={textColor}>
           {children}
         </ButtonText>
