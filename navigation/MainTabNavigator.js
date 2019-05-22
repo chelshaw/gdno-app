@@ -2,25 +2,22 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
+import COLORS from '../constants/Colors';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import StyleGuideScreen from '../screens/StyleGuideScreen';
+import CareGuidesScreen from '../screens/CareGuidesScreen';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name="logo"
     />
   ),
 };
@@ -30,21 +27,19 @@ const LinksStack = createStackNavigator({
 });
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-grid' : 'md-grid'}
     />
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const CareGuidesStack = createStackNavigator({
+  CareGuides: CareGuidesScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+CareGuidesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -53,8 +48,54 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
+const StyleGuideStack = createStackNavigator({
+  StyleGuides: StyleGuideScreen,
+});
+
+StyleGuideStack.navigationOptions = {
+  tabBarLabel: 'Style Guide',
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
+    />
+  ),
+};
+
+const MainNav = createBottomTabNavigator({
   HomeStack,
   LinksStack,
-  SettingsStack,
+  CareGuidesStack,
+  StyleGuideStack,
+}, {
+  initialRouteName: 'HomeStack',
+  tabBarOptions: {
+    showLabel: false,
+    style: {
+      display: 'flex',
+      alignItems: 'stretch',
+      justifyContent: 'space-around',
+      paddingVertical: 10,
+      flexDirection: 'row',
+      borderTopWidth: 3,
+      borderTopColor: COLORS.lightGray,
+    },
+    tabStyle: {
+      flex: 1,
+      paddingVertical: 10,
+    }
+  }
 });
+
+MainNav.navigationOptions = ({ navigation }) => {
+  const { routeName } = navigation.state.routes[navigation.state.index];
+
+  // You can do whatever you like here to pick the title based on the route name
+  const title = routeName;
+
+  return {
+    title,
+  };
+};
+
+export default MainNav;
