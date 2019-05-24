@@ -4,16 +4,27 @@ import { Icon } from 'expo';
 
 import COLORS from '../constants/Colors';
 
-const gdnoIcon = require('../assets/images/gdno-icon.png');
-const gdnoGrayscale = require('../assets/images/gdno-icon-bw.jpg');
+const gdnoIcon = require('../assets/images/nav_home_active.png');
+const gdnoInactive = require('../assets/images/nav_home_inactive.png');
+const cgIcon = require('../assets/images/nav_cg_active.png');
+const cgInactive = require('../assets/images/nav_cg_inactive.png');
 
-const TabBarIcon = ({ focused, name }) => {
-  if (name === 'logo') {
-    const logo = focused ? gdnoIcon : gdnoGrayscale;
+const TabBarIcon = ({ focused, name, size = 30 }) => {
+  if (name === 'home') {
+    const logo = focused ? gdnoIcon : gdnoInactive;
     return (
       <Image
         source={logo}
-        style={{ width: 30, height: 30 }}
+        style={{ width: size, height: size }}
+      />
+    );
+  }
+  if (name === 'guide') {
+    const logo = focused ? cgIcon : cgInactive;
+    return (
+      <Image
+        source={logo}
+        style={{ width: size, height: size }}
       />
     );
   }

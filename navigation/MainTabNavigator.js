@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import COLORS from '../constants/Colors';
+import BottomMenuItem from '../components/BottomMenuItem';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
@@ -15,9 +16,9 @@ const HomeStack = createStackNavigator({
 
 HomeStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
-      name="logo"
+      name="home"
     />
   ),
 };
@@ -28,9 +29,9 @@ const LinksStack = createStackNavigator({
 
 LinksStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-grid' : 'md-grid'}
+      name="guide"
     />
   ),
 };
@@ -41,7 +42,7 @@ const CareGuidesStack = createStackNavigator({
 
 CareGuidesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
     />
@@ -55,7 +56,7 @@ const StyleGuideStack = createStackNavigator({
 StyleGuideStack.navigationOptions = {
   tabBarLabel: 'Style Guide',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
     />
@@ -75,14 +76,13 @@ const MainNav = createBottomTabNavigator({
       display: 'flex',
       alignItems: 'stretch',
       justifyContent: 'space-around',
-      paddingVertical: 10,
       flexDirection: 'row',
       borderTopWidth: 3,
       borderTopColor: COLORS.lightGray,
+      height: 65,
     },
     tabStyle: {
-      flex: 1,
-      paddingVertical: 10,
+      flexGrow: 1,
     }
   }
 });
