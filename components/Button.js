@@ -23,7 +23,7 @@ const Button = ({
   const buttonColor = disabled ? 'lightGray' : color;
   const ss = StyleSheet.create({
     buttonStyle: {
-      paddingVertical: 10,
+      paddingVertical: 16,
       paddingHorizontal: 10,
       borderWidth: 2,
       borderColor: COLORS[buttonColor],

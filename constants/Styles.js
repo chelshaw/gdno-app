@@ -1,6 +1,6 @@
 import COLORS from './Colors';
 
-const space = [4, 8, 16, 24, 32, 40];
+export const space = [4, 8, 16, 24, 32, 40];
 
 const floating = (elevation = 10) => ({
   ios: {
@@ -59,6 +59,17 @@ export const FONTS = {
   lightItalic: {
     fontFamily: 'circularBold',
   },
+};
+
+export const centered = {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+export const verticallyCentered = {
+  flex: 1,
+  justifyContent: 'center',
 };
 
 export default {

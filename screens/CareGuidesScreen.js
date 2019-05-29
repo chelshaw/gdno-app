@@ -1,67 +1,75 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
+  // Image,
+  // Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
+  FlatList,
   View,
-  SafeAreaView,
-  StatusBar,
+  // SafeAreaView,
+  // StatusBar,
 } from 'react-native';
-
-import STYLES from '../constants/Styles';
+import { SectionTitle } from '../components/Type';
+// import { observer, dec } from 'mobx-react';
+import CareGuideEmptyState from '../components/CareGuideEmptyState';
+import getPlantData from '../data/plantData';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
+    paddingTop: 55,
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
-  },
-  emptyState: {
-
-  },
-  addButton: {
-    ...STYLES.button,
+    marginTop: 30,
   }
 });
 
-export default class CareGuidesScreen extends React.Component {
+// @observer
+class CareGuidesScreen extends React.Component {
   static navigationOptions = {
-    title: 'My Plants',
-    headerStyle: {
-      textAlign: 'center',
-      color: 'green',
-    },
+    header: null,
+    // headerStyle: {
+    //   textAlign: 'center',
+    //   color: 'green',
+    // },
+  };
+
+  state = {
+    plants: [],
   };
 
   handleAddPlantsPress = () => {
-    console.log('handling add');
+    getPlantData()
+      .then((result) => {
+        this.setState({
+          plants: result.data.records,
+        });
+      });
   }
 
   render() {
+    const { plants } = this.state;
+
+    if (plants.length === 0) {
+      return <CareGuideEmptyState onButtonClick={this.handleAddPlantsPress} />;
+    }
+
+    const data = plants.map(p => ({ herb: p.fields.Herb, key: p.id }));
+
     return (
-      <SafeAreaView style={[styles.contentContainer, { backgroundColor: '#6a51ae' }]}>
-        <ScrollView style={styles.container}>
-          {/* Go ahead and delete ExpoLinksView and replace it with your
-             * content, we just wanted to provide you with some helpful links */}
-          <Text> Loading... </Text>
-
-          <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-            <Text>Care Guides Go Here</Text>
-          </ScrollView>
-
-          <View style={styles.emptyState}>
-            <TouchableOpacity onPress={this.handleAddPlantsPress} style={styles.addButton}>
-              <Text>Add Plants</Text>
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <View style={styles.contentContainer}>
+        <View>
+          <SectionTitle>My Care Guides</SectionTitle>
+        </View>
+        <FlatList
+          data={data}
+          renderItem={({ item }) => <SectionTitle>{item.herb}</SectionTitle>}
+        />
+      </View>
     );
   }
 }
+
+export default CareGuidesScreen;

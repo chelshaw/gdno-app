@@ -13,6 +13,7 @@ const Type = ({
   children,
   uppercase = false,
   style = {},
+  align = 'left',
 }) => {
   const fontSelect = italic ? `${weight}Italic` : weight;
   const textStyle = StyleSheet.create({
@@ -21,6 +22,7 @@ const Type = ({
       color: COLORS[color],
       lineHeight: size * 1.5,
       fontSize: size,
+      textAlign: align,
       ...style
     }
   });
@@ -46,6 +48,11 @@ Type.propTypes = {
   italic: PropTypes.bool,
   size: PropTypes.number,
   children: PropTypes.string.isRequired,
+  align: PropTypes.oneOf([
+    'left',
+    'center',
+    'right',
+  ]),
 };
 
 export const Header = props => (<Type weight="bold" size={36} {...props} />);
