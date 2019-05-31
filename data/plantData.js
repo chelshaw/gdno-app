@@ -1,14 +1,10 @@
 import axios from 'axios';
-import * as apiConfig from '../config.json';
 
-
-const request = requestObj => (
-  new Promise((resolve, reject) => {
-    axios(requestObj)
-      .then(response => resolve(response))
-      .catch(error => reject(error));
-  })
-);
+const request = requestObj => new Promise((resolve, reject) => {
+  axios(requestObj)
+    .then(response => resolve(response))
+    .catch(error => reject(error));
+});
 
 export const performGet = (url, params = {}, headers, config = {}) => request({
   params,
