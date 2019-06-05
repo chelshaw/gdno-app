@@ -14,8 +14,7 @@ import COLORS from '../constants/Colors';
 import { space } from '../constants/Styles';
 
 const ListItemWithImage = ({
-  imageUrl,
-  name,
+  item,
   selectable = false,
   selected,
   onPress,
@@ -44,30 +43,29 @@ const ListItemWithImage = ({
       width: 50,
     }
   });
-  const accessibilityStates = selectable ? [] : ['disabled'];
+  // const accessibilityStates = selectable ? [] : ['disabled'];
   const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   const handleOnPress = () => {
-    onPress(name, selected);
+    console.log('list item');
+    onPress(item, selected);
   };
   return (
     <Touchable
       onPress={handleOnPress}
-      disabled={!selectable}
-      accessibilityLabel={name}
+      accessibilityLabel={item.name}
       accessibilityRole="button"
-      accessibilityStates={accessibilityStates}
       style={ss.outer}
     >
       <View style={ss.item}>
         <View style={ss.image}>
           <Image
             style={{ width: 50, height: 50, borderRadius: 25 }}
-            source={{ uri: imageUrl }}
+            source={{ uri: item.imageUrl }}
           />
         </View>
         <View style={ss.text}>
           <SectionTitle>
-            {name}
+            {item.name}
           </SectionTitle>
         </View>
         {selectable
@@ -84,6 +82,11 @@ const ListItemWithImage = ({
 
 /* eslint-disable react/require-default-props */
 ListItemWithImage.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    imageUrl: PropTypes.string,
+  }).isRequired,
   onPress: PropTypes.func.isRequired,
 };
 

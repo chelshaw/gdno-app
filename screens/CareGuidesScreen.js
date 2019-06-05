@@ -4,9 +4,11 @@ import {
   StyleSheet,
   FlatList,
   View,
+  ActivityIndicator,
 } from 'react-native';
 import { SectionTitle } from '../components/Type';
 import CareGuideEmptyState from '../components/CareGuideEmptyState';
+import PlantList from '../components/PlantList';
 import ListItemWithImage from '../components/ListItemWithImage';
 import getPlantData from '../data/plantData';
 import { space } from '../constants/Styles';
@@ -29,70 +31,57 @@ class CareGuidesScreen extends React.Component {
 
   state = {
     plants: [],
-    selected: ['Parsley'],
+    loading: false,
+    error: false,
   };
 
-  toggleSelect = (item, isSelected = false) => {
-    const { selected } = this.state;
-
-    this.setState((prev) => {
-      const newSelected = [...prev.selected];
-      if (isSelected) {
-        newSelected.splice(selected.indexOf(item), 1);
-      } else {
-        newSelected.push(item);
-      }
-
-      return {
-        selected: newSelected,
-      };
-    });
+  handlePlantPress = (plant) => {
+    // TODO: navigate to subscreen
   }
 
   handleAddPlantsPress = () => {
+    this.setState({ loading: true, error: false });
     getPlantData()
       .then((result) => {
         this.setState({
           plants: result.data.records,
+          loading: false,
         });
       })
-      .catch(() => {
-        console.error('result is error');
+      .catch((e) => {
+        console.error('result is error', e);
+        this.setState({ loading: false, error: true });
       });
   }
 
   render() {
-    const { plants, selected } = this.state;
-    console.log({ selected });
+    const { plants, loading, error } = this.state;
 
     if (plants.length === 0) {
       return <CareGuideEmptyState onButtonClick={this.handleAddPlantsPress} />;
     }
 
+    if (loading) {
+      return <ActivityIndicator size="large" color="#0000ff" />;
+    }
+
+    if (error) {
+      // TODO: Add generic error state
+      return <SectionTitle>There was an error!</SectionTitle>;
+    }
+
     const data = plants.filter(p => !!p.fields && p.fields.Herb).map(p => ({
-      herb: p.fields.Herb,
+      name: p.fields.Herb,
+      id: p.id,
       key: p.id,
       imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.6JK1veW-MP4yvRbOQDg4hAHaHa&pid=Api',
     }));
 
     return (
       <View style={styles.contentContainer}>
-        <View>
-          <SectionTitle>My Care Guides</SectionTitle>
-        </View>
         <ScrollView contentContainerStyle={{ paddingHorizontal: space[2] }}>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <ListItemWithImage
-                imageUrl={item.imageUrl}
-                name={item.herb}
-                selectable
-                onPress={this.toggleSelect}
-                selected={selected.indexOf(item.herb) > -1}
-              />
-            )}
-          />
+          <SectionTitle>My Care Guides</SectionTitle>
+          <PlantList plants={data} onPress={this.handlePlantPress} />
         </ScrollView>
       </View>
     );

@@ -15,9 +15,9 @@ export const performGet = (url, params = {}, headers, config = {}) => request({
 });
 
 const getPlantData = () => performGet(
-  `${apiConfig.airtable.baseUrl}/Plants?maxRecords=3&view=Grid%20view`,
+  `${airtableUrl}/Plants?view=overview`,
   {},
-  { Authorization: `Bearer ${apiConfig.airtable.key}` },
+  { Authorization: `Bearer ${airtableKey}` },
   {},
 );
 
