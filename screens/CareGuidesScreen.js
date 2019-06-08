@@ -36,6 +36,7 @@ class CareGuidesScreen extends React.Component {
   };
 
   handlePlantPress = (plant) => {
+    this.props.navigation.navigate('CareGuide', { ...plant });
     // TODO: navigate to subscreen
   }
 

@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import StyleGuideScreen from '../screens/StyleGuideScreen';
 import CareGuidesScreen from '../screens/CareGuidesScreen';
+import CareGuideEssentials from '../screens/CareGuideEssentials';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -37,6 +38,7 @@ LinksStack.navigationOptions = {
 
 const CareGuidesStack = createStackNavigator({
   CareGuides: CareGuidesScreen,
+  CareGuide: CareGuideEssentials,
 });
 
 CareGuidesStack.navigationOptions = {
