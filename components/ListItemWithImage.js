@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-  Image,
-  Platform,
   StyleSheet,
   View,
-  TouchableNativeFeedback,
-  TouchableOpacity,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import { SectionTitle } from './Type';
+import Touchable from './Touchable';
+import ThumbnailWithFallback from './ThumbnailWithFallback';
 import SelectIndicator from './SelectIndicator';
 import COLORS from '../constants/Colors';
 import { space } from '../constants/Styles';
@@ -32,7 +30,7 @@ const ListItemWithImage = ({
       borderBottomWidth: 1,
       borderBottomColor: COLORS.lightGray,
     },
-    image: {
+    imageContainer: {
       width: 50,
     },
     text: {
@@ -43,12 +41,10 @@ const ListItemWithImage = ({
       width: 50,
     }
   });
-  // const accessibilityStates = selectable ? [] : ['disabled'];
-  const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   const handleOnPress = () => {
-    console.log('list item');
     onPress(item, selected);
   };
+
   return (
     <Touchable
       onPress={handleOnPress}
@@ -57,11 +53,8 @@ const ListItemWithImage = ({
       style={ss.outer}
     >
       <View style={ss.item}>
-        <View style={ss.image}>
-          <Image
-            style={{ width: 50, height: 50, borderRadius: 25 }}
-            source={{ uri: item.imageUrl }}
-          />
+        <View style={ss.imageContainer}>
+          <ThumbnailWithFallback imageUrl={item.imageUrl} name={item.name} />
         </View>
         <View style={ss.text}>
           <SectionTitle>

@@ -1,15 +1,13 @@
 import React from 'react';
 import {
-  Platform,
   StyleSheet,
-  TouchableNativeFeedback,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import COLORS from '../constants/Colors';
 import { ButtonText } from './Type';
+import Touchable from './Touchable';
 
 const Button = ({
   accessibilityLabel,
@@ -18,6 +16,7 @@ const Button = ({
   children,
   inverted = false,
   disabled = false,
+  transparent = false,
   style,
 }) => {
   const buttonColor = disabled ? 'lightGray' : color;
@@ -33,9 +32,21 @@ const Button = ({
   });
   const accessibilityLabelText = accessibilityLabel || children;
   const accessibilityStates = disabled ? ['disabled'] : [];
-  const Touchable = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   let textColor = 'white';
   if (inverted) textColor = buttonColor;
+  if (transparent) {
+    return (
+      <Touchable
+        onPress={onPress}
+        disabled={disabled}
+        accessibilityLabel={accessibilityLabelText}
+        accessibilityRole="button"
+        accessibilityStates={accessibilityStates}
+      >
+        {children}
+      </Touchable>
+    );
+  }
   return (
     <Touchable
       onPress={onPress}
@@ -71,5 +82,7 @@ Button.propTypes = {
   accessibilityLabel: PropTypes.string,
   disabled: PropTypes.bool,
 };
+
+export const ClearButton = ({ ...props }) => (<Button transparent color="gray" {...props} />);
 
 export default Button;

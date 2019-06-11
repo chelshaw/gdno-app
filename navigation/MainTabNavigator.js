@@ -3,12 +3,14 @@ import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import COLORS from '../constants/Colors';
-import BottomMenuItem from '../components/BottomMenuItem';
+
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import StyleGuideScreen from '../screens/StyleGuideScreen';
 import CareGuidesScreen from '../screens/CareGuidesScreen';
-import CareGuideEssentials from '../screens/CareGuideEssentials';
+import CareGuideDetails from '../screens/CareGuideDetails';
+
+import BottomMenuItem from '../components/BottomMenuItem';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -38,7 +40,7 @@ LinksStack.navigationOptions = {
 
 const CareGuidesStack = createStackNavigator({
   CareGuides: CareGuidesScreen,
-  CareGuide: CareGuideEssentials,
+  CareGuide: CareGuideDetails,
 });
 
 CareGuidesStack.navigationOptions = {
@@ -55,7 +57,6 @@ const StyleGuideStack = createStackNavigator({
 });
 
 StyleGuideStack.navigationOptions = {
-  tabBarLabel: 'Style Guide',
   tabBarIcon: ({ focused }) => (
     <BottomMenuItem
       focused={focused}
@@ -66,7 +67,6 @@ StyleGuideStack.navigationOptions = {
 
 const MainNav = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
   CareGuidesStack,
   StyleGuideStack,
 }, {
@@ -87,16 +87,5 @@ const MainNav = createBottomTabNavigator({
     }
   }
 });
-
-MainNav.navigationOptions = ({ navigation }) => {
-  const { routeName } = navigation.state.routes[navigation.state.index];
-
-  // You can do whatever you like here to pick the title based on the route name
-  const title = routeName;
-
-  return {
-    title,
-  };
-};
 
 export default MainNav;

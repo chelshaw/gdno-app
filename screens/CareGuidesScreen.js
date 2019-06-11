@@ -2,25 +2,23 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
-  FlatList,
   View,
   ActivityIndicator,
 } from 'react-native';
 import { SectionTitle } from '../components/Type';
 import CareGuideEmptyState from '../components/CareGuideEmptyState';
 import PlantList from '../components/PlantList';
-import ListItemWithImage from '../components/ListItemWithImage';
 import getPlantData from '../data/plantData';
 import { space } from '../constants/Styles';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 55,
+    // paddingTop: 55,
     backgroundColor: '#fff',
   },
   contentContainer: {
-    marginTop: 30,
+    // marginTop: 30,
   }
 });
 
@@ -40,8 +38,7 @@ class CareGuidesScreen extends React.Component {
     // TODO: navigate to subscreen
   }
 
-  handleAddPlantsPress = () => {
-    this.setState({ loading: true, error: false });
+  getAndSetPlantData = () => {
     getPlantData()
       .then((result) => {
         this.setState({
@@ -53,6 +50,13 @@ class CareGuidesScreen extends React.Component {
         console.error('result is error', e);
         this.setState({ loading: false, error: true });
       });
+  }
+
+  handleAddPlantsPress = () => {
+    this.setState(
+      { loading: true, error: false },
+      this.getAndSetPlantData()
+    );
   }
 
   render() {
@@ -71,11 +75,11 @@ class CareGuidesScreen extends React.Component {
       return <SectionTitle>There was an error!</SectionTitle>;
     }
 
-    const data = plants.filter(p => !!p.fields && p.fields.Herb).map(p => ({
+    const data = plants.filter(p => !!p.fields && p.fields.Herb && p.fields.Selling).map(p => ({
       name: p.fields.Herb,
       id: p.id,
       key: p.id,
-      imageUrl: 'https://tse4.mm.bing.net/th?id=OIP.6JK1veW-MP4yvRbOQDg4hAHaHa&pid=Api',
+      imageUrl: p.fields.images ? p.fields.images[0].thumbnails.large.url : '',
     }));
 
     return (
