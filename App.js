@@ -3,6 +3,7 @@ import {
   Platform,
   StatusBar,
   StyleSheet,
+  SafeAreaView,
   View,
 } from 'react-native';
 import {
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    paddingTop: StatusBar.currentHeight,
   },
 });
 
@@ -58,18 +60,21 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
-        <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
+        <SafeAreaView style={styles.container}>
+          <StatusBar translucent />
+          <AppLoading
+            startAsync={this._loadResourcesAsync}
+            onError={this._handleLoadingError}
+            onFinish={this._handleFinishLoading}
+          />
+        </SafeAreaView>
       );
     }
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+      <SafeAreaView style={styles.container}>
+        <StatusBar translucent />
         <AppNavigator />
-      </View>
+      </SafeAreaView>
     );
   }
 }
