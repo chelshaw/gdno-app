@@ -5,9 +5,8 @@ import {
   StyleSheet,
   Text,
 } from 'react-native';
-import Button from '../components/Button';
-import { SectionTitle } from '../components/Type';
 import TitleBar from '../components/TitleBar';
+import SubNavMenu from '../components/SubNavMenu';
 import { getPlantDataById } from '../data/plantData';
 import { detailsScreens } from '../constants/constants';
 
@@ -62,12 +61,7 @@ class CareGuidesScreen extends React.Component {
   }
 
   renderSubnav = () => (
-    <View style={styles.subnav}>
-      <Button onPress={() => this.goToDetail(detailsScreens.essentials)}>Essentials</Button>
-      <Button onPress={() => this.goToDetail(detailsScreens.grow)}>Grow</Button>
-      <Button onPress={() => this.goToDetail(detailsScreens.issues)}>Issues</Button>
-      <Button onPress={() => this.goToDetail(detailsScreens.enjoy)}>Enjoy</Button>
-    </View>
+    <SubNavMenu onPress={this.goToDetail} active={this.state.screen} />
   )
 
   render() {
@@ -104,7 +98,6 @@ class CareGuidesScreen extends React.Component {
           title={name}
           imageUrl={info.images ? info.images[0].thumbnails.large.url : ''}
         />
-        <SectionTitle>{name}</SectionTitle>
         {subnav}
         <Text>{screenContent}</Text>
       </View>

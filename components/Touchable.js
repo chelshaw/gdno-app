@@ -16,7 +16,7 @@ const Touchable = ({
   const TouchableComponent = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   return (
     <TouchableComponent
-      onPress={onPress}
+      onPress={() => onPress()}
       disabled={disabled}
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="button"
