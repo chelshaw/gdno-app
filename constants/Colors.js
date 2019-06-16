@@ -9,6 +9,7 @@ const medGray = '#636C74';
 const lightGray = '#E6E6E6';
 const danger = '#b41a1a';
 const warning = '#d4851a';
+const offWhite = '#fafafa';
 const white = '#ffffff';
 
 export default {
@@ -21,6 +22,7 @@ export default {
   gray,
   medGray,
   lightGray,
+  offWhite,
   white,
   tabIconDefault: medGray,
   tabIconSelected: grass,

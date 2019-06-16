@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   View,
+  ScrollView,
   ActivityIndicator,
   StyleSheet,
   Text,
@@ -9,15 +10,14 @@ import TitleBar from '../components/TitleBar';
 import SubNavMenu from '../components/SubNavMenu';
 import { getPlantDataById } from '../data/plantData';
 import { detailsScreens } from '../constants/constants';
+import COLORS from '../constants/Colors';
+import CareGuideEssentials from '../components/CareGuideEssentials';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     // paddingTop: 55,
     backgroundColor: '#fff',
-  },
-  contentContainer: {
-    marginTop: 30,
   },
   subnav: {
     display: 'flex',
@@ -51,13 +51,34 @@ class CareGuidesScreen extends React.Component {
         });
       })
       .catch((e) => {
-        console.error('result is error', e);
         this.setState({ loading: false });
       });
   }
 
   goToDetail = (screen) => {
     this.setState({ screen });
+  }
+
+  renderScreenContent = (screen) => {
+    const { info } = this.state;
+    if (!info) return (<ActivityIndicator />);
+
+    switch (screen) {
+      case detailsScreens.grow:
+        return (
+          <Text>{JSON.stringify(info)}</Text>
+        );
+      case detailsScreens.issues:
+        return (
+          <Text>{JSON.stringify(info)}</Text>
+        );
+      case detailsScreens.enjoy:
+        return (
+          <Text>{JSON.stringify(info)}</Text>
+        );
+      default:
+        return <CareGuideEssentials info={this.state.info} />;
+    }
   }
 
   renderSubnav = () => (
@@ -68,39 +89,26 @@ class CareGuidesScreen extends React.Component {
     const { name } = this.props.navigation.state.params;
     const { info, screen, loading } = this.state;
     const subnav = this.renderSubnav();
-    let screenContent;
+    const screenContent = this.renderScreenContent(screen);
 
     if (loading) {
       return (
         <View style={styles.container}>
-          <ActivityIndicator size="large" color="#0000ff" />
+          <ActivityIndicator size="large" color={COLORS.grass} />
         </View>
       );
     }
 
-    switch (screen) {
-      case detailsScreens.grow:
-        screenContent = 'Grow';
-        break;
-      case detailsScreens.issues:
-        screenContent = 'Issues';
-        break;
-      case detailsScreens.enjoy:
-        screenContent = 'Enjoy';
-        break;
-      default:
-        screenContent = JSON.stringify(info);
-    }
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <TitleBar
           onClickBack={() => this.props.navigation.goBack()}
           title={name}
           imageUrl={info.images ? info.images[0].thumbnails.large.url : ''}
         />
         {subnav}
-        <Text>{screenContent}</Text>
-      </View>
+        {screenContent}
+      </ScrollView>
     );
   }
 }

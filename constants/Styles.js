@@ -4,7 +4,7 @@ export const space = [4, 8, 16, 24, 32, 40];
 
 const floating = (elevation = 10) => ({
   ios: {
-    shadowColor: 'black',
+    shadowColor: '#a0a0a0',
     shadowOffset: { height: -(elevation / 3) }, // 3
     shadowOpacity: (elevation / 100), // 0.1
     shadowRadius: (elevation / 3), // 3
