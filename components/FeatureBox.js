@@ -71,17 +71,19 @@ const FeatureBlock = ({
   category,
   feature,
 }) => {
-  const f = getContentForFeature(category, feature);
-  if (!f) return null;
+  const content = getContentForFeature(category, feature);
+
+  if (!content) return null;
+
   return (
     <Paper style={ss.bounds}>
       <View style={ss.imageArea}>
         <Image
-          source={f.icon}
+          source={content.icon}
           style={{ width: 40, height: 40 }}
         />
       </View>
-      <TextHeader style={{ lineHeight: 14 }} uppercase color="grass">{f.text}</TextHeader>
+      <TextHeader style={{ lineHeight: 14 }} uppercase color="grass">{content.text}</TextHeader>
     </Paper>
   );
 };

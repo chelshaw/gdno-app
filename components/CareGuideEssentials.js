@@ -50,11 +50,11 @@ const CareGuideEssentials = ({
   const renderFeatures = () => (
     <View style={ss.featuresContainer}>
       {info.pet && <FeatureBox category="pet" feature={info.pet} />}
-      {info.frost && <FeatureBox category="frost" feature="Frost Resistant" />}
+      {info.frost && <FeatureBox category="frost" feature={info.frost} />}
       {info.type && (<FeatureBox category="lifespan" feature={info.type} />)}
       {info.sun && (<FeatureBox category="sun" feature={info.sun} />)}
       {info.thirstiness && (<FeatureBox category="water" feature={info.thirstiness} />)}
-      {info.soil && (<FeatureBox category="soil" text={info.soil} />)}
+      {info.soil && (<FeatureBox category="soil" feature={info.soil} />)}
     </View>
   );
 
