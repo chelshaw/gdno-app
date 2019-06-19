@@ -15,6 +15,7 @@ import {
   TextHeader,
   FormLabel,
 } from '../components/Type';
+import StandardModal from '../components/StandardModal';
 import Button from '../components/Button';
 
 const semanticColors = [
@@ -61,10 +62,19 @@ export default class StyleGuideScreen extends React.Component {
   state = {
     active: 'first',
     active2: 'old',
+    modalVisible: false,
   };
 
+  componentWillUnmount() {
+    this.setModalVisible(false);
+  }
+
+  setModalVisible(visible) {
+    this.setState({ modalVisible: visible });
+  }
+
   handleButtonClick = () => {
-    // Handling goes here
+    this.setModalVisible(true);
   };
 
   handleButtonSetPress = (active) => {
@@ -79,6 +89,15 @@ export default class StyleGuideScreen extends React.Component {
     const { active, active2 } = this.state;
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <StandardModal
+          visible={this.state.modalVisible}
+          onClose={() => this.setModalVisible(false)}
+        >
+          <View style={{ flex: 1 }}>
+            <Header>I am a modal!</Header>
+          </View>
+        </StandardModal>
+
         <Header>Buttons</Header>
         {semanticColors.map(color => (
           <View style={styles.buttonContainer} key={`btn-${color}`}>
@@ -87,6 +106,7 @@ export default class StyleGuideScreen extends React.Component {
             </Button>
           </View>
         ))}
+
         <Header>Inverted Buttons</Header>
         {semanticColors.map(color => (
           <View style={styles.buttonContainer} key={`btn-inverted-${color}`}>
@@ -95,6 +115,7 @@ export default class StyleGuideScreen extends React.Component {
             </Button>
           </View>
         ))}
+
         <Header>Disabled Buttons</Header>
         <View style={styles.buttonContainer}>
           <Button disabled onPress={this.handleButtonClick}>
@@ -104,6 +125,7 @@ export default class StyleGuideScreen extends React.Component {
             Disabled Button!
           </Button>
         </View>
+
         <Header>Button Set</Header>
         <View style={styles.multipleButtonContainer}>
           <Button style={styles.buttonSetChild} onPress={() => this.handleTypeSetPress('new')} inverted={active2 === 'new'}>
@@ -124,6 +146,7 @@ export default class StyleGuideScreen extends React.Component {
             Third
           </Button>
         </View>
+
         <Header>Typography</Header>
         <View style={styles.typographyContainer}>
           <Header>Header</Header>

@@ -39,6 +39,7 @@ const TitleBar = ({
   onClickBack,
   title,
   imageUrl,
+  showImage = true,
 }) => (
   <View style={ss.container}>
     {showBackButton
@@ -56,9 +57,9 @@ const TitleBar = ({
       )
     }
     <View style={ss.main}>
-      <ThumbnailWithFallback imageUrl={imageUrl} name={title} />
+      {showImage && <ThumbnailWithFallback imageUrl={imageUrl} name={title} />}
       <View style={ss.title}>
-        <NavText>{title}</NavText>
+        {title && <NavText>{title}</NavText>}
       </View>
     </View>
     <View style={ss.button} />
@@ -70,6 +71,7 @@ TitleBar.propTypes = {
   onClickBack: PropTypes.func,
   title: PropTypes.string,
   imageUrl: PropTypes.string,
+  showImage: PropTypes.bool,
 };
 
 export default TitleBar;

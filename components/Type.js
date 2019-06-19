@@ -15,6 +15,7 @@ const Type = ({
   style = {},
   align = 'left',
 }) => {
+  if (!children) return null;
   const fontSelect = italic ? `${weight}Italic` : weight;
   const textStyle = StyleSheet.create({
     textStyle: {
@@ -23,10 +24,13 @@ const Type = ({
       lineHeight: size * 1.5,
       fontSize: size,
       textAlign: align,
-      ...style
     }
   });
-  return (<Text style={textStyle.textStyle}>{uppercase ? children.toUpperCase() : children}</Text>);
+  return (
+    <Text style={[textStyle.textStyle, style]}>
+      {uppercase ? children.toUpperCase() : children}
+    </Text>
+  );
 };
 
 /* eslint-disable react/require-default-props */
@@ -53,6 +57,7 @@ Type.propTypes = {
     'center',
     'right',
   ]),
+  style: PropTypes.object,
 };
 
 export const Header = props => (<Type weight="bold" size={36} {...props} />);
