@@ -72,6 +72,20 @@ export const verticallyCentered = {
   justifyContent: 'center',
 };
 
+export const careGuideStyles = {
+  section: {
+    padding: space[2],
+  },
+  topSection: {
+    padding: space[3],
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.lightGray,
+  },
+  titleSpacing: {
+    marginBottom: space[1],
+  },
+};
+
 export default {
   floating,
   lockedBottom,

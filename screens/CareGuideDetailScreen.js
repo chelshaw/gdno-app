@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class CareGuidesScreen extends React.Component {
+class CareGuideDetailScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -51,6 +51,7 @@ class CareGuidesScreen extends React.Component {
         });
       })
       .catch((e) => {
+        console.error(e);
         this.setState({ loading: false });
       });
   }
@@ -113,4 +114,4 @@ class CareGuidesScreen extends React.Component {
   }
 }
 
-export default CareGuidesScreen;
+export default CareGuideDetailScreen;

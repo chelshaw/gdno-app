@@ -8,7 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import StyleGuideScreen from '../screens/StyleGuideScreen';
 import CareGuidesScreen from '../screens/CareGuidesScreen';
-import CareGuideDetails from '../screens/CareGuideDetails';
+import CareGuideDetailScreen from '../screens/CareGuideDetailScreen';
 
 import BottomMenuItem from '../components/BottomMenuItem';
 
@@ -40,7 +40,7 @@ LinksStack.navigationOptions = {
 
 const CareGuidesStack = createStackNavigator({
   CareGuides: CareGuidesScreen,
-  CareGuide: CareGuideDetails,
+  CareGuide: CareGuideDetailScreen,
 });
 
 CareGuidesStack.navigationOptions = {

@@ -12,22 +12,12 @@ import {
   DetailHeader,
 } from './Type';
 import Paper from './Paper';
-import { space } from '../constants/Styles';
+import { space, careGuideStyles } from '../constants/Styles';
 import COLORS from '../constants/Colors';
 import FeatureBox from './FeatureBox';
 
 const ss = StyleSheet.create({
-  section: {
-    padding: space[2],
-  },
-  topSection: {
-    padding: space[3],
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.lightGray,
-  },
-  titleSpacing: {
-    marginBottom: space[1],
-  },
+  ...careGuideStyles,
   featuresContainer: {
     display: 'flex',
     flexDirection: 'row',
