@@ -1,4 +1,3 @@
-const tintColor = '#2f95dc';
 const cyan = '#41B6AC';
 const grass = '#73B641';
 const green = '#1D812B';
@@ -8,9 +7,12 @@ const tangerine = '#FF881F';
 const gray = '#424242';
 const medGray = '#636C74';
 const lightGray = '#E6E6E6';
+const danger = '#b41a1a';
+const warning = '#d4851a';
+const offWhite = '#fafafa';
+const white = '#ffffff';
 
 export default {
-  tintColor,
   cyan,
   grass,
   green,
@@ -20,13 +22,15 @@ export default {
   gray,
   medGray,
   lightGray,
+  offWhite,
+  white,
   tabIconDefault: medGray,
   tabIconSelected: grass,
-  tabBar: '#fefefe',
-  errorBackground: 'red',
-  errorText: '#fff',
-  warningBackground: '#EAEB5E',
-  warningText: '#666804',
-  noticeBackground: tintColor,
-  noticeText: '#fff',
+  tabBar: lightGray,
+  errorBackground: danger,
+  errorText: white,
+  warningBackground: warning,
+  warningText: white,
+  noticeBackground: cyan,
+  noticeText: white,
 };

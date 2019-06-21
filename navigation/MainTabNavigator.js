@@ -2,25 +2,25 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
+import COLORS from '../constants/Colors';
+
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import StyleGuideScreen from '../screens/StyleGuideScreen';
+import CareGuidesScreen from '../screens/CareGuidesScreen';
+import CareGuideDetailScreen from '../screens/CareGuideDetailScreen';
+
+import BottomMenuItem from '../components/BottomMenuItem';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
-      name={
-        Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
-      }
+      name="home"
     />
   ),
 };
@@ -30,31 +30,62 @@ const LinksStack = createStackNavigator({
 });
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name="guide"
     />
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+const CareGuidesStack = createStackNavigator({
+  CareGuides: CareGuidesScreen,
+  CareGuide: CareGuideDetailScreen,
 });
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+CareGuidesStack.navigationOptions = {
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon
+    <BottomMenuItem
       focused={focused}
       name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
     />
   ),
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+const StyleGuideStack = createStackNavigator({
+  StyleGuides: StyleGuideScreen,
 });
+
+StyleGuideStack.navigationOptions = {
+  tabBarIcon: ({ focused }) => (
+    <BottomMenuItem
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
+    />
+  ),
+};
+
+const MainNav = createBottomTabNavigator({
+  HomeStack,
+  CareGuidesStack,
+  StyleGuideStack,
+}, {
+  initialRouteName: 'HomeStack',
+  tabBarOptions: {
+    showLabel: false,
+    style: {
+      display: 'flex',
+      alignItems: 'stretch',
+      justifyContent: 'space-around',
+      flexDirection: 'row',
+      borderTopWidth: 3,
+      borderTopColor: COLORS.lightGray,
+      height: 65,
+    },
+    tabStyle: {
+      flexGrow: 1,
+    }
+  }
+});
+
+export default MainNav;
