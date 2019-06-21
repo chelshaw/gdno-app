@@ -11,7 +11,10 @@ import SubNavMenu from '../components/SubNavMenu';
 import { getPlantDataById } from '../data/plantData';
 import { detailsScreens } from '../constants/constants';
 import COLORS from '../constants/Colors';
+import { centered } from '../constants/Styles';
 import CareGuideEssentials from '../components/CareGuideEssentials';
+import CareGuideGrow from '../components/CareGuideGrow';
+import CareGuideEnjoy from '../components/CareGuideEnjoy';
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +26,8 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     height: 50,
-  }
+  },
+  centered,
 });
 
 class CareGuideDetailScreen extends React.Component {
@@ -67,7 +71,7 @@ class CareGuideDetailScreen extends React.Component {
     switch (screen) {
       case detailsScreens.grow:
         return (
-          <Text>{JSON.stringify(info)}</Text>
+          <CareGuideGrow info={this.state.info} />
         );
       case detailsScreens.issues:
         return (
@@ -75,7 +79,7 @@ class CareGuideDetailScreen extends React.Component {
         );
       case detailsScreens.enjoy:
         return (
-          <Text>{JSON.stringify(info)}</Text>
+          <CareGuideEnjoy info={this.state.info} />
         );
       default:
         return <CareGuideEssentials info={this.state.info} />;
@@ -94,7 +98,7 @@ class CareGuideDetailScreen extends React.Component {
 
     if (loading) {
       return (
-        <View style={styles.container}>
+        <View style={styles.centered}>
           <ActivityIndicator size="large" color={COLORS.grass} />
         </View>
       );

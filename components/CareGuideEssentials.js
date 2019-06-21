@@ -30,12 +30,25 @@ const ss = StyleSheet.create({
 const CareGuideEssentials = ({
   info
 }) => {
-  const renderTTH = () => (
-    <Paper style={{ paddingVertical: space[3] }}>
-      <DetailHeader align="center" color="grass" weight="light">2</DetailHeader>
-      <TextHeader uppercase align="center" color="medGray">months</TextHeader>
-    </Paper>
-  );
+  const renderTTH = (tth) => {
+    let qty = tth;
+    let time = 'days';
+    if (tth > 30) {
+      qty = Math.round(tth / 30);
+      time = 'months';
+    } else if (tth > 7) {
+      qty = Math.round(tth / 7);
+      time = 'weeks';
+    }
+
+    if (!tth) return null;
+    return (
+      <Paper style={{ paddingVertical: space[3] }}>
+        <DetailHeader align="center" color="grass" weight="light">{qty.toString()}</DetailHeader>
+        <TextHeader uppercase align="center" color="medGray">{time}</TextHeader>
+      </Paper>
+    );
+  };
 
   const renderFeatures = () => (
     <View style={ss.featuresContainer}>
@@ -64,7 +77,7 @@ const CareGuideEssentials = ({
         <View style={ss.titleSpacing}>
           <SectionTitle uppercase color="medGray">How long till the harvest?</SectionTitle>
         </View>
-        {renderTTH(info.tth)}
+        {renderTTH(info.timeToHarvest)}
       </View>
       <View style={ss.section}>
         <View style={ss.titleSpacing}>

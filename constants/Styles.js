@@ -74,10 +74,12 @@ export const verticallyCentered = {
 
 export const careGuideStyles = {
   section: {
-    padding: space[2],
+    paddingHorizontal: space[2],
+    paddingVertical: space[2],
   },
   topSection: {
-    padding: space[3],
+    paddingHorizontal: space[2],
+    paddingVertical: space[4],
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGray,
   },

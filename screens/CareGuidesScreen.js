@@ -8,18 +8,17 @@ import {
 import { SectionTitle } from '../components/Type';
 import CareGuideEmptyState from '../components/CareGuideEmptyState';
 import PlantList from '../components/PlantList';
+import ErrorState from '../components/ErrorState';
 import getPlantData from '../data/plantData';
-import { space } from '../constants/Styles';
+import { space, centered } from '../constants/Styles';
+import COLORS from '../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 55,
     backgroundColor: '#fff',
   },
-  contentContainer: {
-    // marginTop: 30,
-  }
+  centered,
 });
 
 class CareGuidesScreen extends React.Component {
@@ -35,7 +34,6 @@ class CareGuidesScreen extends React.Component {
 
   handlePlantPress = (plant) => {
     this.props.navigation.navigate('CareGuide', { ...plant });
-    // TODO: navigate to subscreen
   }
 
   getAndSetPlantData = () => {
@@ -47,7 +45,7 @@ class CareGuidesScreen extends React.Component {
         });
       })
       .catch((e) => {
-        console.error('result is error', e);
+        console.error(e);
         this.setState({ loading: false, error: true });
       });
   }
@@ -63,19 +61,24 @@ class CareGuidesScreen extends React.Component {
     const { plants, loading, error } = this.state;
 
     if (plants.length === 0) {
-      return <CareGuideEmptyState onButtonClick={this.handleAddPlantsPress} />;
+      return (
+        <View style={styles.centered}>
+          <CareGuideEmptyState onButtonClick={this.handleAddPlantsPress} />
+        </View>
+      );
     }
 
     if (loading) {
-      return <ActivityIndicator size="large" color="#0000ff" />;
+      return (
+        <View style={styles.centered}>
+          <ActivityIndicator size="large" color={COLORS.magenta} />
+        </View>
+      );
     }
 
-    if (error) {
-      // TODO: Add generic error state
-      return <SectionTitle>There was an error!</SectionTitle>;
-    }
+    if (error) return <ErrorState details="We're having issues gathering the plant data. Try again later." />;
 
-    const data = plants.filter(p => !!p.fields && p.fields.Herb && p.fields.Selling).map(p => ({
+    const data = plants.filter(p => !!p.fields && p.fields.Herb && p.fields.selling).map(p => ({
       name: p.fields.Herb,
       id: p.id,
       key: p.id,
