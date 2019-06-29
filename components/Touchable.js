@@ -11,12 +11,14 @@ const Touchable = ({
   onPress,
   disabled = false,
   children,
+  returnKey,
 }) => {
+  const handlePress = () => onPress(returnKey);
   const accessibilityStates = disabled ? ['disabled'] : [];
   const TouchableComponent = Platform.OS === 'android' ? TouchableNativeFeedback : TouchableOpacity;
   return (
     <TouchableComponent
-      onPress={onPress}
+      onPress={handlePress}
       disabled={disabled}
       accessibilityLabel={accessibilityLabel}
       accessibilityRole="button"
@@ -32,6 +34,7 @@ Touchable.propTypes = {
   children: PropTypes.node.isRequired,
   accessibilityLabel: PropTypes.string,
   disabled: PropTypes.bool,
+  returnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
 };
 
 export default Touchable;

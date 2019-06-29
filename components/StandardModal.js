@@ -21,7 +21,7 @@ const ss = StyleSheet.create({
 const StandardModal = ({
   visible,
   onClose,
-  title = 'Tomatoes • Pets',
+  title = '',
   children
 }) => (
   <Modal
@@ -42,6 +42,7 @@ StandardModal.propTypes = {
   visible: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   title: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default StandardModal;
