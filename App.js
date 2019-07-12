@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  Platform,
   StatusBar,
   StyleSheet,
   SafeAreaView,
-  View,
 } from 'react-native';
 import {
   AppLoading,
@@ -18,7 +16,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingTop: StatusBar.currentHeight,
   },
 });
 

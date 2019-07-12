@@ -2,6 +2,8 @@ import COLORS from './Colors';
 
 export const space = [4, 8, 16, 24, 32, 40];
 
+export const borderWide = 2;
+
 const floating = (elevation = 10) => ({
   ios: {
     shadowColor: '#a0a0a0',
@@ -86,6 +88,24 @@ export const careGuideStyles = {
   titleSpacing: {
     marginBottom: space[1],
   },
+};
+
+export const centeredHeader = {
+  headerMode: 'screen',
+  headerStyle: {
+    backgroundColor: '#ffffff',
+    textAlign: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.lightGray,
+  },
+  headerTintColor: '#ffffff',
+  headerTitleStyle: {
+    color: COLORS.gray,
+    textAlign: 'center',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    flex: 1,
+  }
 };
 
 export default {

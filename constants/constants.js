@@ -134,3 +134,11 @@ export const allFeatures = {
   pet: petFeatures,
   frost: frostFeatures,
 };
+
+export const links = {
+  instagram: 'https://instagram.com/growgardenio',
+  facebook: 'https://facebook.com/growgardenio',
+  shop: 'https://growgardenio.com/',
+  help: 'mailto:help@growgardenio.zendesk.com',
+  feedback: 'mailto:feedback@growgardenio.zendesk.com',
+};
