@@ -98,7 +98,7 @@ export const centeredHeader = {
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGray,
   },
-  headerTintColor: '#ffffff',
+  headerTintColor: COLORS.gray,
   headerTitleStyle: {
     color: COLORS.gray,
     textAlign: 'center',

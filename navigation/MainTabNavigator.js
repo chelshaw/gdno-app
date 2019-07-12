@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import COLORS from '../constants/Colors';
@@ -13,69 +13,92 @@ import CareGuideDetailScreen from '../screens/CareGuideDetailScreen';
 
 import BottomMenuItem from '../components/BottomMenuItem';
 
+const hasBottomNav = (screen) => {
+  const shouldHaveBottomNav = ['Home', 'Settings'];
+  if (shouldHaveBottomNav.indexOf(screen) >= 0) return true;
+  return false;
+};
+
 const HomeStack = createStackNavigator({
   Home: {
     screen: HomeScreen,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: () => ({
       headerTitle: 'Home',
       ...centeredHeader,
     }),
-  }
+  },
+  Settings: {
+    screen: LinksScreen,
+    path: 'settings',
+    navigationOptions: () => ({
+      headerTitle: 'Links',
+      ...centeredHeader,
+      headerRight: (<View style={{ width: 20 }} />),
+    }),
+  },
+  StyleGuide: {
+    screen: StyleGuideScreen,
+    navigationOptions: () => ({
+      headerTitle: 'Style Guide',
+      ...centeredHeader,
+      headerRight: (<View style={{ width: 20 }} />),
+    }),
+  },
 });
 
-HomeStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => (
-    <BottomMenuItem
-      focused={focused}
-      name="home"
-    />
-  ),
-};
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => (
-    <BottomMenuItem
-      focused={focused}
-      name="guide"
-    />
-  ),
+HomeStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  navigation.state.routes.map((r) => {
+    tabBarVisible = hasBottomNav(r.routeName);
+    return tabBarVisible;
+  });
+  return {
+    tabBarVisible,
+    tabBarIcon: ({ focused }) => (
+      <BottomMenuItem
+        focused={focused}
+        name="home"
+      />
+    ),
+  };
 };
 
 const CareGuidesStack = createStackNavigator({
-  CareGuides: CareGuidesScreen,
-  CareGuide: CareGuideDetailScreen,
+  CareGuides: {
+    screen: CareGuidesScreen,
+    navigationOptions: () => ({
+      headerTitle: 'My Plants',
+      ...centeredHeader,
+    }),
+    path: 'care-guides',
+  },
+  CareGuide: {
+    screen: CareGuideDetailScreen,
+    navigationOptions: () => ({ header: null }),
+    path: 'plant/:name',
+  }
 });
 
-CareGuidesStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => (
-    <BottomMenuItem
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
-
-const StyleGuideStack = createStackNavigator({
-  StyleGuides: StyleGuideScreen,
-});
-
-StyleGuideStack.navigationOptions = {
-  tabBarIcon: ({ focused }) => (
-    <BottomMenuItem
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-eye' : 'md-eye'}
-    />
-  ),
+CareGuidesStack.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  navigation.state.routes.map((r) => {
+    tabBarVisible = hasBottomNav(r.routeName);
+    return tabBarVisible;
+  });
+  return {
+    tabBarVisible,
+    tabBarIcon: ({ focused }) => (
+      <BottomMenuItem
+        focused={focused}
+        name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      />
+    ),
+  };
 };
 
 const MainNav = createBottomTabNavigator({
   HomeStack,
   CareGuidesStack,
-  StyleGuideStack,
 }, {
   initialRouteName: 'HomeStack',
   tabBarOptions: {

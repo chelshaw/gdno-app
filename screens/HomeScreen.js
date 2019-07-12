@@ -1,11 +1,9 @@
 import React from 'react';
 import {
   StyleSheet,
-  SafeAreaView,
   Linking,
   View,
 } from 'react-native';
-import { WebBrowser } from 'expo';
 
 import Button from '../components/Button';
 import { verticallyCentered, space } from '../constants/Styles';
@@ -38,19 +36,18 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={styles.container}>
-          <View style={styles.topLinks}>
-            <View style={styles.buttonSpace}><Button align="left" color="grass" onPress={() => { /* TODO: Add getting started page and link from here */ }}>Getting Started</Button></View>
-            <View style={styles.buttonSpace}><Button align="left" color="magenta" onPress={() => this.handleOpenLink('shop')}>Shop</Button></View>
-            <View style={styles.buttonSpace}><Button align="left" color="royal" onPress={() => this.handleOpenLink('help')}>Get Help</Button></View>
-          </View>
-          <View style={styles.bottomLinks}>
-            <Button align="left" style={{ paddingVertical: space[1] }} transparent color="grass" onPress={() => this.handleOpenLink('instagram')}>Follow us on social</Button>
-            <Button align="left" style={{ paddingVertical: space[1] }} transparent color="grass" onPress={() => this.handleOpenLink('feedback')}>Feedback</Button>
-          </View>
+      <View style={styles.container}>
+        <View style={styles.topLinks}>
+          <View style={styles.buttonSpace}><Button align="left" color="grass" onPress={() => this.props.navigation.navigate('Links')}>Getting Started</Button></View>
+          <View style={styles.buttonSpace}><Button align="left" color="magenta" onPress={() => this.handleOpenLink('shop')}>Shop</Button></View>
+          <View style={styles.buttonSpace}><Button align="left" color="royal" onPress={() => this.handleOpenLink('help')}>Get Help</Button></View>
+          <View style={styles.buttonSpace}><Button align="left" color="cyan" onPress={() => this.props.navigation.navigate('StyleGuide')}>Style Guide</Button></View>
         </View>
-      </SafeAreaView>
+        <View style={styles.bottomLinks}>
+          <Button align="left" style={{ paddingVertical: space[1] }} transparent color="grass" onPress={() => this.handleOpenLink('instagram')}>Follow us on social</Button>
+          <Button align="left" style={{ paddingVertical: space[1] }} transparent color="grass" onPress={() => this.handleOpenLink('feedback')}>Feedback</Button>
+        </View>
+      </View>
     );
   }
 }
