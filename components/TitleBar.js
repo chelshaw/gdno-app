@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   Platform,
+  StatusBar,
 } from 'react-native';
 import { Icon } from 'expo';
 import PropTypes from 'prop-types';
@@ -17,6 +18,7 @@ const ss = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     paddingVertical: space[0],
+    paddingTop: Platform.OS === 'ios' ? space[0] : StatusBar.currentHeight + space[0],
     alignItems: 'center',
   },
   button: {

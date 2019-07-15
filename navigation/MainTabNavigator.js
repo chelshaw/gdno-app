@@ -70,7 +70,7 @@ const CareGuidesStack = createStackNavigator({
       headerTitle: 'My Plants',
       ...centeredHeader,
     }),
-    path: 'care-guides',
+    path: 'my-care-guides',
   },
   CareGuide: {
     screen: CareGuideDetailScreen,
@@ -90,7 +90,7 @@ CareGuidesStack.navigationOptions = ({ navigation }) => {
     tabBarIcon: ({ focused }) => (
       <BottomMenuItem
         focused={focused}
-        name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+        name="guide"
       />
     ),
   };

@@ -9,6 +9,9 @@ const PlantList = ({
   plants,
   onPress = () => {},
   selectable = false,
+  selectedList = [],
+  header = null,
+  footer = null,
 }) => {
   const handleOnPress = (item) => {
     onPress(item);
@@ -22,8 +25,11 @@ const PlantList = ({
           item={item}
           selectable={selectable}
           onPress={handleOnPress}
+          selected={selectable && selectedList.indexOf(item.id) >= 0}
         />
       )}
+      ListHeaderComponent={header}
+      ListFooterComponent={footer}
     />
   );
 };
@@ -36,6 +42,9 @@ PlantList.propTypes = {
   })).isRequired,
   onPress: PropTypes.func,
   selectable: PropTypes.bool,
+  selectedList: PropTypes.arrayOf(PropTypes.string),
+  header: PropTypes.node,
+  footer: PropTypes.node,
 };
 
 export default PlantList;

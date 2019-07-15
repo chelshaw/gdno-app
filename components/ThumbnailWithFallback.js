@@ -8,6 +8,8 @@ import {
 import COLORS from '../constants/Colors';
 import { DetailHeader } from './Type';
 
+// TODO: Cache images
+// https://docs.expo.io/versions/latest/guides/preloading-and-caching-assets/
 const ThumbnailWithFallback = ({
   imageUrl,
   name,

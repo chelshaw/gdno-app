@@ -10,7 +10,7 @@
     "comma-dangle": "off",
     "react/jsx-filename-extension": "off",
     "react/destructuring-assignment": "off",
-    "react/require-default-props": 1,
+    "react/require-default-props": "off",
     "react/forbid-prop-types": "off",
   },
   "globals": {
