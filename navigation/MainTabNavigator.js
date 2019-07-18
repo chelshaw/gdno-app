@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 import COLORS from '../constants/Colors';
@@ -14,7 +14,7 @@ import CareGuideDetailScreen from '../screens/CareGuideDetailScreen';
 import BottomMenuItem from '../components/BottomMenuItem';
 
 const hasBottomNav = (screen) => {
-  const shouldHaveBottomNav = ['Home', 'Settings'];
+  const shouldHaveBottomNav = ['Home', 'Settings', 'CareGuides'];
   if (shouldHaveBottomNav.indexOf(screen) >= 0) return true;
   return false;
 };
