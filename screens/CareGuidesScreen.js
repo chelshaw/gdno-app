@@ -5,22 +5,38 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
-import { Header } from '../components/Type';
+import { Header, SectionTitle } from '../components/Type';
 import CareGuideEmptyState from '../components/CareGuideEmptyState';
 import PlantList from '../components/PlantList';
 import ErrorState from '../components/ErrorState';
 import StandardModal from '../components/StandardModal';
 import Button from '../components/Button';
 import getPlantData, { loadStoredPlants, getAndSavePlantsToStorage } from '../data/plantData';
-import { space, centered } from '../constants/Styles';
+import { space, centered, padded } from '../constants/Styles';
 import COLORS from '../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent: 'space-between',
+  },
+  main: {
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
+    flex: 1,
+  },
+  savedPlants: {
+    flex: 1,
+    paddingHorizontal: space[2],
   },
   centered,
+  padded,
+  bottomButton: {
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.lightGray,
+    padding: space[2],
+  },
 });
 
 class CareGuidesScreen extends React.Component {
@@ -38,9 +54,11 @@ class CareGuidesScreen extends React.Component {
   }
 
   handlePlantSelect = (plant) => {
-    const { selectedPlantIds } = this.state;
+    const { selectedPlantIds, savedPlants } = this.state;
     const index = selectedPlantIds.indexOf(plant.id);
+    const isSaved = savedPlants.map(p => p.id).indexOf(plant.id) >= 0;
     const selected = [...selectedPlantIds];
+    if (isSaved) return;
     if (index >= 0) {
       selected.splice(index, 1);
     } else {
@@ -50,7 +68,7 @@ class CareGuidesScreen extends React.Component {
   }
 
   handlePlantPress = (plant) => {
-    this.props.navigation.navigate('CareGuide', { ...plant });
+    this.props.navigation.navigate('CareGuide', { name: plant.name });
   }
 
   loadPlants = async () => {
@@ -98,7 +116,7 @@ class CareGuidesScreen extends React.Component {
           selectedPlantIds: [],
         });
       })
-      .catch((e) => {
+      .catch(() => {
         this.setState({ modalVisible: false, error: true });
       });
   }
@@ -124,49 +142,51 @@ class CareGuidesScreen extends React.Component {
     if (error) return <ErrorState details="We're having issues gathering the plant data. Try again later." />;
 
     return (
-      <View style={styles.contentContainer}>
+      <View style={styles.container}>
         <StandardModal
           visible={modalVisible}
           onClose={() => this.setState({ modalVisible: false })}
+          footer={(
+            <View style={styles.bottomButton}>
+              <Button
+                disabled={loading || selectedPlantIds.length === 0}
+                onPress={this.handleDownloadSelectedGuides}
+              >
+                {`Download (${selectedPlantIds.length}) ${selectedPlantIds.length === 1 ? 'Care Guide' : 'Care Guides'}`}
+              </Button>
+            </View>
+          )}
         >
-          <View style={{ padding: space[2] }}>
-            {loading
-              ? (
-                <View style={styles.centered}>
-                  <ActivityIndicator size="large" color={COLORS.magenta} />
-                </View>
-              ) : (
-                <PlantList
-                  plants={plantList}
-                  onPress={this.handlePlantSelect}
-                  selectable
-                  selectedList={selectedPlantIds}
-                  header={(<Header>Select the plant(s) you&apos;re growing</Header>)}
-                  footer={(
-                    <View style={{ paddingBottom: 50 }}>
-                      <Button onPress={this.handleDownloadSelectedGuides}>
-                        Download Care Guides
-                      </Button>
-                    </View>
-                  )}
-                />
-              )
-            }
-          </View>
+          {loading
+            ? (
+              <View style={styles.centered}>
+                <ActivityIndicator size="large" color={COLORS.magenta} />
+              </View>
+            ) : (
+              <PlantList
+                plants={plantList}
+                onPress={this.handlePlantSelect}
+                selectable
+                style={styles.padded}
+                selectedList={selectedPlantIds}
+                addedList={savedPlants.map(p => p.id)}
+                header={(<Header>Select the plant(s) you&apos;re growing</Header>)}
+                footer={(<View style={{ paddingVertical: space[3] }}><SectionTitle uppercase align="center">More Coming Soon.</SectionTitle></View>)}
+              />
+            )
+        }
         </StandardModal>
-        <ScrollView contentContainerStyle={{ paddingHorizontal: space[2] }}>
+        <View style={[styles.savedPlants]}>
           <PlantList
             plants={savedPlants}
             onPress={this.handlePlantPress}
-            footer={(
-              <View>
-                <Button onPress={this.handleAddPlantsPress}>
-                  Add More Plants
-                </Button>
-              </View>
-            )}
           />
-        </ScrollView>
+        </View>
+        <View style={styles.padded}>
+          <Button onPress={this.handleAddPlantsPress}>
+            Add More Plants
+          </Button>
+        </View>
       </View>
     );
   }
