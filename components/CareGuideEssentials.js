@@ -15,13 +15,14 @@ import {
 import Paper from './Paper';
 import StandardModal from './StandardModal';
 import Touchable from './Touchable';
-import { space, careGuideStyles } from '../constants/Styles';
+import { space, padded, careGuideStyles } from '../constants/Styles';
 import COLORS from '../constants/Colors';
 import FeatureBox from './FeatureBox';
 import { allFeatures } from '../constants/constants';
 
 const ss = StyleSheet.create({
   ...careGuideStyles,
+  padded,
   featuresContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -144,7 +145,7 @@ class CareGuideEssentials extends Component {
           onClose={() => this.setState({ isFeatureDetailsModalOpen: false })}
           title={featureDetails.category}
         >
-          <View style={{ flex: 1 }}>
+          <View style={padded}>
             <Header>{featureDetails.title}</Header>
             <Body>{featureDetails.content}</Body>
           </View>
