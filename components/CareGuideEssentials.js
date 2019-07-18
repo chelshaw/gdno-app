@@ -57,7 +57,6 @@ class CareGuideEssentials extends Component {
     return (
       <Paper style={{ paddingVertical: space[3] }}>
         <DetailHeader align="center" color="grass" weight="light">{qty.toString()}</DetailHeader>
-        <TextHeader uppercase align="center" color="medGray">{time}</TextHeader>
       </Paper>
     );
   };
