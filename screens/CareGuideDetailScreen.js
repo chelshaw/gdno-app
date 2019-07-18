@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import TitleBar from '../components/TitleBar';
 import SubNavMenu from '../components/SubNavMenu';
-import { getPlantDataById } from '../data/plantData';
+import { loadStoredPlantByName } from '../data/plantData';
 import { detailsScreens } from '../constants/constants';
 import COLORS from '../constants/Colors';
 import { centered } from '../constants/Styles';
@@ -42,15 +42,15 @@ class CareGuideDetailScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.getPlantInfo(this.props.navigation.state.params.id);
+    this.getPlantInfo(this.props.navigation.state.params.name);
   }
 
-  getPlantInfo = (plantId) => {
+  getPlantInfo = (plant) => {
     this.setState({ loading: true });
-    getPlantDataById(plantId)
+    loadStoredPlantByName(plant)
       .then((result) => {
         this.setState({
-          info: result.data.fields,
+          info: result,
           loading: false,
         });
       })
