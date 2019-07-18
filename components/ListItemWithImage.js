@@ -4,7 +4,7 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import { SectionTitle } from './Type';
+import { SectionTitle, Body } from './Type';
 import Touchable from './Touchable';
 import ThumbnailWithFallback from './ThumbnailWithFallback';
 import SelectIndicator from './SelectIndicator';
@@ -15,12 +15,10 @@ const ListItemWithImage = ({
   item,
   selectable = false,
   selected,
+  added,
   onPress,
 }) => {
   const ss = StyleSheet.create({
-    outer: {
-      paddingHorizontal: space[2],
-    },
     item: {
       display: 'flex',
       flexDirection: 'row',
@@ -61,7 +59,12 @@ const ListItemWithImage = ({
             {item.name}
           </SectionTitle>
         </View>
-        {selectable
+        {added && (
+          <View style={ss.indicator}>
+            <Body italic color="lightGray">Added</Body>
+          </View>
+        )}
+        {selectable && !added
           && (
           <View style={ss.indicator}>
             <SelectIndicator selected={selected} />
