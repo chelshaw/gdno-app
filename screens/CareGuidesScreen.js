@@ -170,7 +170,7 @@ class CareGuidesScreen extends React.Component {
                 selectedList={selectedPlantIds}
                 addedList={savedPlants.map(p => p.id)}
                 header={(<Header>Select the plant(s) you&apos;re growing</Header>)}
-                footer={(<View style={{ paddingVertical: space[3] }}><SectionTitle uppercase align="center">More Coming Soon.</SectionTitle></View>)}
+                footer={(<View style={{ paddingVertical: space[3] }}><SectionTitle align="center">More coming soon.</SectionTitle></View>)}
               />
             )
         }
