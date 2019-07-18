@@ -1,11 +1,11 @@
-const airtableUrl = ''; // Your personal Airtable API URL
-const airtableKey = ''; // Your personal Airtable API Key
 import { AsyncStorage } from 'react-native';
 import handleError from './handleError';
 import { performGet, performMultipleGet } from './restful';
 import { getMultipleValues, getValue, setValue } from './localStorage';
 import { keyifyName } from '../constants/constants';
 
+const airtableUrl = ''; // Your personal Airtable API URL
+const airtableKey = ''; // Your personal Airtable API Key
 
 const getPlantData = async () => {
   let plantList;

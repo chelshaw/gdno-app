@@ -9,7 +9,6 @@ import {
   Body,
   Header,
   SectionTitle,
-  TextHeader,
   DetailHeader,
 } from './Type';
 import Paper from './Paper';
@@ -63,13 +62,13 @@ class CareGuideEssentials extends Component {
 
   onClickFeature = (category) => {
     const { info } = this.props;
-    const { text, details } = allFeatures[category][info[category]];
+    const { text, detailKey } = allFeatures[category][info[category]];
     this.setState({
       isFeatureDetailsModalOpen: true,
       featureDetails: {
         title: text,
         category: `${info.Herb} • ${category}`,
-        content: details,
+        content: (detailKey && info[detailKey]) || 'More coming soon.',
       }
     });
   }
