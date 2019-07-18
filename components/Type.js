@@ -69,6 +69,6 @@ export const SectionTitle = props => (<Type weight="medium" size={16} {...props}
 export const NavText = props => (<Type weight="black" size={12} {...props} />);
 export const TextHeader = props => (<Type weight="bold" size={12} {...props} />);
 export const FormLabel = props => (<Type weight="bold" size={12} color="medGray" {...props} />);
-export const ButtonText = props => (<Type weight="bold" size={12} color="white" align="center" uppercase {...props} />);
+export const ButtonText = props => (<Type weight="bold" size={12} color="white" align="center" uppercase style={{ letterSpacing: 1 }} {...props} />);
 
 export default Type;
