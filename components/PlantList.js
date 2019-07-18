@@ -10,8 +10,10 @@ const PlantList = ({
   onPress = () => {},
   selectable = false,
   selectedList = [],
+  addedList = [],
   header = null,
   footer = null,
+  style = {},
 }) => {
   const handleOnPress = (item) => {
     onPress(item);
@@ -20,11 +22,13 @@ const PlantList = ({
   return (
     <FlatList
       data={plants}
+      style={style}
       renderItem={({ item }) => (
         <ListItemWithImage
           item={item}
           selectable={selectable}
           onPress={handleOnPress}
+          added={addedList.indexOf(item.id) >= 0}
           selected={selectable && selectedList.indexOf(item.id) >= 0}
         />
       )}
@@ -43,8 +47,10 @@ PlantList.propTypes = {
   onPress: PropTypes.func,
   selectable: PropTypes.bool,
   selectedList: PropTypes.arrayOf(PropTypes.string),
+  addedList: PropTypes.arrayOf(PropTypes.string),
   header: PropTypes.node,
   footer: PropTypes.node,
+  style: PropTypes.object,
 };
 
 export default PlantList;
