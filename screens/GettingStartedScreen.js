@@ -7,7 +7,7 @@ import {
 
 import { SectionTitle, Body } from '../components/Type';
 import { space } from '../constants/Styles';
-import * as COLORS from '../constants/Colors';
+import COLORS from '../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   },
   section: {
     paddingBottom: space[2],
+    marginBottom: space[2],
     borderBottomWidth: 1,
     borderBottomColor: COLORS.lightGray,
   },
@@ -26,17 +27,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   imagePlaceholder: {
-    backgroundColor: COLORS.royal,
-    width: 400,
-    height: 300,
+    backgroundColor: COLORS.lightGray,
+    height: 200,
+    flex: 1,
+    justifyContent: 'center',
+    marginBottom: space[1],
+    alignItems: 'center',
   }
 });
 
 const GettingStartedScreen = () => (
   <ScrollView contentContainerStyle={styles.container}>
     <View style={styles.section}>
-      <View style={styles.imageBlock}>
-        <View style={styles.imagePlaceholder} />
+      <View style={styles.imagePlaceholder}>
+        <Body weight="bold" color="white">Image Not Available</Body>
       </View>
       <SectionTitle>1. Unpack the Box.</SectionTitle>
       <Body>
@@ -45,8 +49,8 @@ Bust out your plant(s), your soil, mulch if you have it, and the container.
       </Body>
     </View>
     <View style={styles.section}>
-      <View style={styles.imageBlock}>
-        <View style={styles.imagePlaceholder} />
+      <View style={styles.imagePlaceholder}>
+        <Body weight="bold" color="white">Image Not Available</Body>
       </View>
       <SectionTitle>2. Get Your Hands Dirty.</SectionTitle>
       <Body>
@@ -58,8 +62,8 @@ Throw soil in the container like a madperson. If you’ve got a small container,
       </Body>
     </View>
     <View style={styles.section}>
-      <View style={styles.imageBlock}>
-        <View style={styles.imagePlaceholder} />
+      <View style={styles.imagePlaceholder}>
+        <Body weight="bold" color="white">Image Not Available</Body>
       </View>
       <SectionTitle>3. Transplant.</SectionTitle>
       <Body>
@@ -72,8 +76,8 @@ Soak the soil of your baby plant (not the leaves) with water to make it nice and
       </Body>
     </View>
     <View style={styles.section}>
-      <View style={styles.imageBlock}>
-        <View style={styles.imagePlaceholder} />
+      <View style={styles.imagePlaceholder}>
+        <Body weight="bold" color="white">Image Not Available</Body>
       </View>
       <SectionTitle>4. Mulch It, Baby</SectionTitle>
       <Body>
@@ -89,8 +93,8 @@ Some plants boxes contain mulch, which is just a word for organic stuff you thro
       </Body>
     </View>
     <View style={styles.finalSection}>
-      <View style={styles.imageBlock}>
-        <View style={styles.imagePlaceholder} />
+      <View style={styles.imagePlaceholder}>
+        <Body weight="bold" color="white">Image Not Available</Body>
       </View>
       <SectionTitle>5. Seal the deal</SectionTitle>
       <Body>
