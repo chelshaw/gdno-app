@@ -2,7 +2,7 @@ import React from 'react';
 import {
   StatusBar,
   StyleSheet,
-  SafeAreaView,
+  View,
 } from 'react-native';
 import {
   AppLoading,
@@ -55,21 +55,19 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
       return (
-        <SafeAreaView style={styles.container}>
-          <StatusBar translucent />
+        <View style={styles.container}>
           <AppLoading
             startAsync={this.loadResourcesAsync}
             onError={this.handleLoadingError}
             onFinish={this.handleFinishLoading}
           />
-        </SafeAreaView>
+        </View>
       );
     }
     return (
-      <SafeAreaView style={styles.container}>
-        <StatusBar translucent />
+      <View style={styles.container}>
         <AppNavigator />
-      </SafeAreaView>
+      </View>
     );
   }
 }
