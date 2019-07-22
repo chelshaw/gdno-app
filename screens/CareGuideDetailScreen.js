@@ -18,6 +18,7 @@ import TitleBar from '../components/TitleBar';
 import SubNavMenu from '../components/SubNavMenu';
 import CareGuideEssentials from '../components/CareGuideEssentials';
 import CareGuideGrow from '../components/CareGuideGrow';
+import CareGuideIssues from '../components/CareGuideIssues';
 import CareGuideEnjoy from '../components/CareGuideEnjoy';
 
 const styles = StyleSheet.create({
@@ -76,10 +77,10 @@ class CareGuideDetailScreen extends React.Component {
         return (
           <CareGuideGrow info={this.state.info} />
         );
-      // case detailsScreens.issues:
-      //   return (
-      //     <Text>{JSON.stringify(info)}</Text>
-      //   );
+      case detailsScreens.issues:
+        return (
+          <CareGuideIssues />
+        );
       case detailsScreens.enjoy:
         return (
           <CareGuideEnjoy info={this.state.info} />

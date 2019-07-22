@@ -23,7 +23,6 @@ const getPlantData = async () => {
         key: keyifyName(p.fields.Herb),
         imageUrl: p.fields.images ? p.fields.images[0].thumbnails.large.url : '',
       }));
-    console.log(JSON.stringify(plantList));
   } catch (e) {
     throw (e);
   }

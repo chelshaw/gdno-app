@@ -31,7 +31,6 @@ const ThumbnailWithFallback = ({
       justifyContent: 'center',
     },
   });
-  console.log(imageUrl);
   if (!imageUrl) {
     return (
       <View style={ss.container}>

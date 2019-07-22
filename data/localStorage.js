@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import handleError from './handleError';
 
 export const setValue = async (key, value) => {
   let val = value;
@@ -34,6 +35,7 @@ export const getMultipleValues = async (keys) => {
 };
 
 // FOR DEBUGGING
+/* eslint-disable no-unused-vars */
 const clearKeys = async () => {
   let keys;
   try {
@@ -43,6 +45,5 @@ const clearKeys = async () => {
   }
   AsyncStorage.multiRemove(keys, (e) => {
     if (e) handleError(e);
-    console.log('keys cleared');
   });
 };
