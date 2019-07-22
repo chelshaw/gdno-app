@@ -1,14 +1,19 @@
 import { values } from 'lodash';
 
 const placeholder = require('../assets/images/icon.png');
-const annualIcon = require('../assets/images/life_annual.png');
-const biennialIcon = require('../assets/images/life_biennial.png');
-const perennialIcon = require('../assets/images/life_perennial.png');
-const fullSunIcon = require('../assets/images/sun_full.png');
-const partialSunIcon = require('../assets/images/sun_partial.png');
-const lessWaterIcon = require('../assets/images/water_01.png');
-const regularWaterIcon = require('../assets/images/water_02.png');
-const moreWaterIcon = require('../assets/images/water_03.png');
+const annualIcon = require('../assets/icons/life_annual.png');
+const biennialIcon = require('../assets/icons/life_biennial.png');
+const perennialIcon = require('../assets/icons/life_perennial.png');
+const fullSunIcon = require('../assets/icons/sun_full.png');
+const partialSunIcon = require('../assets/icons/sun_partial.png');
+const lessWaterIcon = require('../assets/icons/water_01.png');
+const regularWaterIcon = require('../assets/icons/water_02.png');
+const moreWaterIcon = require('../assets/icons/water_03.png');
+const bothPetIcon = require('../assets/icons/pet_bothfriendly.png');
+const catPetIcon = require('../assets/icons/pet_catfriendly.png');
+const dogPetIcon = require('../assets/icons/pet_dogfriendly.png');
+
+const nonePetIcon = bothPetIcon;
 
 export const keyifyName = name => name.toString().trim().toLowerCase().replace(/[^a-z0-9]/g, '');
 
@@ -75,22 +80,22 @@ export const waterFeatures = {
 export const petFeatures = {
   cat: {
     text: 'Cat Friendly',
-    icon: placeholder,
+    icon: catPetIcon,
     detailKey: 'petDetails',
   },
   dog: {
     text: 'Dog Friendly',
-    icon: placeholder,
+    icon: dogPetIcon,
     detailKey: 'petDetails',
   },
   'cat and dog': {
     text: 'Pet Friendly',
-    icon: placeholder,
+    icon: bothPetIcon,
     detailKey: 'petDetails',
   },
   none: {
     text: 'Not Pet Friendly',
-    icon: placeholder,
+    icon: nonePetIcon,
     detailKey: 'petDetails',
   },
 };
