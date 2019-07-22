@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  Platform,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import PropTypes from 'prop-types';
@@ -31,8 +32,12 @@ const styles = StyleSheet.create({
 
 export default class HomeScreen extends React.Component {
   handleOpenLink = (path) => {
-    const url = links[path] || links.shop;
-    WebBrowser.openBrowserAsync(url);
+    if (path === 'help' && Platform.OS === 'ios') {
+      this.props.navigation.navigate('Help');
+    } else {
+      const url = links[path] || links.shop;
+      WebBrowser.openBrowserAsync(url);
+    }
   }
 
   render() {

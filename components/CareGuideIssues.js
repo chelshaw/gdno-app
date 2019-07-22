@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View,
   StyleSheet,
+  Platform,
 } from 'react-native';
 import { WebBrowser } from 'expo';
 import {
@@ -33,7 +34,11 @@ const CareGuideIssues = () => (
     </View>
 
     <View style={ss.section}>
-      <Button onPress={handleHelpPress}>Help me</Button>
+      {Platform.OS === 'android'
+        // TODO: better experience for IOS
+        ? <Button onPress={handleHelpPress}>Help me</Button>
+        : <Body weight="bold">help@growgardenio.zendesk.com</Body>
+      }
     </View>
   </View>
 );
