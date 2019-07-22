@@ -9,9 +9,9 @@ export const borderWide = 2;
 const floating = (elevation = 10) => ({
   ios: {
     shadowColor: '#a0a0a0',
-    shadowOffset: { height: -(elevation / 3) }, // 3
-    shadowOpacity: (elevation / 100), // 0.1
-    shadowRadius: (elevation / 3), // 3
+    shadowOffset: { height: -(elevation / 3) },
+    shadowOpacity: (elevation / 30),
+    shadowRadius: (elevation / 3),
   },
   android: {
     elevation,
