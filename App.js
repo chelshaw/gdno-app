@@ -10,6 +10,7 @@ import {
   Font,
   Icon,
 } from 'expo';
+import handleError from './data/handleError';
 import AppNavigator from './navigation/AppNavigator';
 
 const styles = StyleSheet.create({
@@ -24,14 +25,13 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
 
-  _loadResourcesAsync = async () => Promise.all([
+  loadResourcesAsync = async () => Promise.all([
     Asset.loadAsync([
       /* eslint-disable global-require */
       require('./assets/icons/nav_home_active.png'),
       require('./assets/icons/nav_cg_inactive.png'),
     ]),
     Font.loadAsync({
-      // This is the font that we are using for our tab bar
       ...Icon.Ionicons.font,
       circularLight: require('./assets/fonts/CircularAirPro-Light.otf'),
       circularMedium: require('./assets/fonts/CircularAirPro-Medium.otf'),
@@ -44,13 +44,11 @@ export default class App extends React.Component {
     }),
   ]);
 
-  _handleLoadingError = (error) => {
-    // In this case, you might want to report the error to your error
-    // reporting service, for example Sentry
-    console.warn(error);
+  handleLoadingError = (error) => {
+    handleError(error);
   };
 
-  _handleFinishLoading = () => {
+  handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
 
@@ -60,9 +58,9 @@ export default class App extends React.Component {
         <SafeAreaView style={styles.container}>
           <StatusBar translucent />
           <AppLoading
-            startAsync={this._loadResourcesAsync}
-            onError={this._handleLoadingError}
-            onFinish={this._handleFinishLoading}
+            startAsync={this.loadResourcesAsync}
+            onError={this.handleLoadingError}
+            onFinish={this.handleFinishLoading}
           />
         </SafeAreaView>
       );

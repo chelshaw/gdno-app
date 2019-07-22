@@ -41,25 +41,6 @@ class CareGuideEssentials extends Component {
     }
   }
 
-  renderTTH = (tth) => {
-    let qty = tth;
-    let time = 'days';
-    if (tth > 30) {
-      qty = Math.round(tth / 30);
-      time = 'months';
-    } else if (tth > 7) {
-      qty = Math.round(tth / 7);
-      time = 'weeks';
-    }
-
-    if (!tth) return null;
-    return (
-      <Paper style={{ paddingVertical: space[3] }}>
-        <DetailHeader align="center" color="grass" weight="light">{qty.toString()}</DetailHeader>
-      </Paper>
-    );
-  };
-
   onClickFeature = (category) => {
     const { info } = this.props;
     const { text, detailKey } = allFeatures[category][info[category]];
@@ -126,12 +107,18 @@ class CareGuideEssentials extends Component {
           </View>
           )
         }
-        <View style={ss.section}>
-          <View style={ss.titleSpacing}>
-            <SectionTitle uppercase color="medGray">How long till the harvest?</SectionTitle>
+        {info.timeToHarvest
+          && (
+          <View style={ss.section}>
+            <View style={ss.titleSpacing}>
+              <SectionTitle uppercase color="medGray">How long till the harvest?</SectionTitle>
+            </View>
+            <Paper style={{ paddingVertical: space[3] }}>
+              <DetailHeader align="center" color="grass" weight="light">{info.timeToHarvest}</DetailHeader>
+            </Paper>
           </View>
-          {this.renderTTH(info.timeToHarvest)}
-        </View>
+          )
+        }
         <View style={ss.section}>
           <View style={ss.titleSpacing}>
             <SectionTitle uppercase color="medGray">Features</SectionTitle>
