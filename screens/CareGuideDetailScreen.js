@@ -4,14 +4,17 @@ import {
   ScrollView,
   ActivityIndicator,
   StyleSheet,
-  Text,
+  SafeAreaView,
 } from 'react-native';
-import TitleBar from '../components/TitleBar';
-import SubNavMenu from '../components/SubNavMenu';
+
 import { loadStoredPlantByName } from '../data/plantData';
 import { detailsScreens } from '../constants/constants';
 import COLORS from '../constants/Colors';
-import { centered } from '../constants/Styles';
+import { centered, safeArea } from '../constants/Styles';
+
+/* COMPONENTS */
+import TitleBar from '../components/TitleBar';
+import SubNavMenu from '../components/SubNavMenu';
 import CareGuideEssentials from '../components/CareGuideEssentials';
 import CareGuideGrow from '../components/CareGuideGrow';
 import CareGuideEnjoy from '../components/CareGuideEnjoy';
@@ -19,7 +22,6 @@ import CareGuideEnjoy from '../components/CareGuideEnjoy';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 55,
     backgroundColor: '#fff',
   },
   subnav: {
@@ -28,6 +30,7 @@ const styles = StyleSheet.create({
     height: 50,
   },
   centered,
+  safeArea,
 });
 
 class CareGuideDetailScreen extends React.Component {
@@ -54,8 +57,7 @@ class CareGuideDetailScreen extends React.Component {
           loading: false,
         });
       })
-      .catch((e) => {
-        console.error(e);
+      .catch(() => {
         this.setState({ loading: false });
       });
   }
@@ -73,10 +75,10 @@ class CareGuideDetailScreen extends React.Component {
         return (
           <CareGuideGrow info={this.state.info} />
         );
-      case detailsScreens.issues:
-        return (
-          <Text>{JSON.stringify(info)}</Text>
-        );
+      // case detailsScreens.issues:
+      //   return (
+      //     <Text>{JSON.stringify(info)}</Text>
+      //   );
       case detailsScreens.enjoy:
         return (
           <CareGuideEnjoy info={this.state.info} />
@@ -105,15 +107,17 @@ class CareGuideDetailScreen extends React.Component {
     }
 
     return (
-      <ScrollView style={styles.container}>
-        <TitleBar
-          onClickBack={() => this.props.navigation.goBack()}
-          title={name}
-          imageUrl={info.images ? info.images[0].thumbnails.large.url : ''}
-        />
-        {subnav}
-        {screenContent}
-      </ScrollView>
+      <SafeAreaView style={styles.safeArea}>
+        <ScrollView style={styles.container}>
+          <TitleBar
+            onClickBack={() => this.props.navigation.goBack()}
+            title={name}
+            imageUrl={info.images ? info.images[0].thumbnails.large.url : ''}
+          />
+          {subnav}
+          {screenContent}
+        </ScrollView>
+      </SafeAreaView>
     );
   }
 }

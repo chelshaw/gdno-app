@@ -92,6 +92,8 @@ export const careGuideStyles = {
   },
 };
 
+export const safeArea = { flex: 1 };
+
 export const centeredHeader = {
   headerMode: 'screen',
   headerStyle: {
