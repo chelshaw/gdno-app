@@ -4,7 +4,6 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import { WebBrowser } from 'expo';
 import {
   Body,
   Header,
@@ -12,22 +11,22 @@ import {
 } from './Type';
 import Touchable from './Touchable';
 import Paper from './Paper';
-import { space, careGuideStyles } from '../constants/Styles';
+import { space, careGuideStyles, verticallyCentered } from '../constants/Styles';
 import COLORS from '../constants/Colors';
 
 const ss = StyleSheet.create({
   ...careGuideStyles,
+  verticallyCentered,
 });
 
-const handleOpenGetStartedGuide = () => {
-  // console.log('clicked');
-  WebBrowser.openBrowserAsync('https://growgardenio.com/pages/about');
-};
-
-const CareGuideGrow = ({
-  info
-}) => {
-  if (!info) return <ActivityIndicator />;
+const CareGuideGrow = ({ info }) => {
+  if (!info) {
+    return (
+      <View style={ss.verticallyCentered}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <View style={{ backgroundColor: COLORS.offWhite }}>
@@ -49,7 +48,7 @@ const CareGuideGrow = ({
 
         <Paper>
           <Touchable
-            onPress={handleOpenGetStartedGuide}
+            onPress="GettingStarted"
             accessibilityLabel="Read our getting started guide"
           >
             <View style={{ paddingVertical: space[3] }}>
