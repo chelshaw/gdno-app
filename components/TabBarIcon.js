@@ -5,10 +5,10 @@ import { Icon } from 'expo';
 
 import COLORS from '../constants/Colors';
 
-const gdnoIcon = require('../assets/images/nav_home_active.png');
-const gdnoInactive = require('../assets/images/nav_home_inactive.png');
-const cgIcon = require('../assets/images/nav_cg_active.png');
-const cgInactive = require('../assets/images/nav_cg_inactive.png');
+const gdnoIcon = require('../assets/icons/nav_home_active.png');
+const gdnoInactive = require('../assets/icons/nav_home_inactive.png');
+const cgIcon = require('../assets/icons/nav_cg_active.png');
+const cgInactive = require('../assets/icons/nav_cg_inactive.png');
 
 const TabBarIcon = ({ focused = false, name, size = 30 }) => {
   if (name === 'home') {
