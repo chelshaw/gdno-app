@@ -8,6 +8,7 @@ import { centeredHeader } from '../constants/Styles';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import StyleGuideScreen from '../screens/StyleGuideScreen';
+import GettingStartedScreen from '../screens/GettingStartedScreen';
 import CareGuidesScreen from '../screens/CareGuidesScreen';
 import CareGuideDetailScreen from '../screens/CareGuideDetailScreen';
 
@@ -40,6 +41,15 @@ const HomeStack = createStackNavigator({
     screen: StyleGuideScreen,
     navigationOptions: () => ({
       headerTitle: 'Style Guide',
+      ...centeredHeader,
+      headerRight: (<View style={{ width: 20 }} />),
+    }),
+  },
+  GettingStarted: {
+    screen: GettingStartedScreen,
+    path: 'getting-started',
+    navigationOptions: () => ({
+      headerTitle: 'Getting Started',
       ...centeredHeader,
       headerRight: (<View style={{ width: 20 }} />),
     }),
