@@ -11,6 +11,7 @@ import { loadStoredPlantByName } from '../data/plantData';
 import { detailsScreens } from '../constants/constants';
 import COLORS from '../constants/Colors';
 import { centered, safeArea } from '../constants/Styles';
+import { navigation } from '../constants/propShapes';
 
 /* COMPONENTS */
 import TitleBar from '../components/TitleBar';
@@ -122,4 +123,7 @@ class CareGuideDetailScreen extends React.Component {
   }
 }
 
+CareGuideDetailScreen.propTypes = {
+  navigation,
+};
 export default CareGuideDetailScreen;

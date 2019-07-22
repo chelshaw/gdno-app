@@ -4,15 +4,19 @@ import {
   View,
   ActivityIndicator,
 } from 'react-native';
+
+/* CONSTANTS */
+import { navigation } from '../constants/propShapes';
+import { space, centered, padded } from '../constants/Styles';
+import COLORS from '../constants/Colors';
+import getPlantData, { loadStoredPlants, getAndSavePlantsToStorage } from '../data/plantData';
+/* COMPONENTS */
 import { Header, SectionTitle } from '../components/Type';
 import CareGuideEmptyState from '../components/CareGuideEmptyState';
 import PlantList from '../components/PlantList';
 import ErrorState from '../components/ErrorState';
 import StandardModal from '../components/StandardModal';
 import Button from '../components/Button';
-import getPlantData, { loadStoredPlants, getAndSavePlantsToStorage } from '../data/plantData';
-import { space, centered, padded } from '../constants/Styles';
-import COLORS from '../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -190,5 +194,9 @@ class CareGuidesScreen extends React.Component {
     );
   }
 }
+
+CareGuidesScreen.propTypes = {
+  navigation,
+};
 
 export default CareGuidesScreen;
