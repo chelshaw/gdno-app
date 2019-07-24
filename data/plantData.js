@@ -4,8 +4,8 @@ import { performGet, performMultipleGet } from './restful';
 import { getMultipleValues, getValue, setValue } from './localStorage';
 import { keyifyName } from '../constants/constants';
 
-const airtableUrl = ''; // Your personal Airtable API URL
-const airtableKey = ''; // Your personal Airtable API Key
+const airtableUrl = '';
+const airtableKey = '';
 
 const getPlantData = async () => {
   let plantList;

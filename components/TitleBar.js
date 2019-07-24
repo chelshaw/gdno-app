@@ -5,7 +5,7 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
-import { Icon } from 'expo';
+import * as Icon from '@expo/vector-icons';
 import PropTypes from 'prop-types';
 import { NavText } from './Type';
 import Touchable from './Touchable';

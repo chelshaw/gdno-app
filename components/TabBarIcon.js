@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import PropTypes from 'prop-types';
-import { Icon } from 'expo';
+import * as Icon from '@expo/vector-icons';
 
 import COLORS from '../constants/Colors';
 

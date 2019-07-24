@@ -78,7 +78,7 @@ class CareGuideEssentials extends Component {
       )}
       {info.thirstiness && (
         <Touchable onPress={this.onClickFeature} returnKey="thirstiness">
-          <View><FeatureBox category="water" feature={info.thirstiness} /></View>
+          <View><FeatureBox category="thirstiness" feature={info.thirstiness} /></View>
         </Touchable>
       )}
       {info.soil && (

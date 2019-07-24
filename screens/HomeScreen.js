@@ -4,7 +4,7 @@ import {
   View,
   Platform,
 } from 'react-native';
-import { WebBrowser } from 'expo';
+import * as WebBrowser from 'expo-web-browser';
 import PropTypes from 'prop-types';
 
 import Button from '../components/Button';

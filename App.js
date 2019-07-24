@@ -1,15 +1,11 @@
 import React from 'react';
 import {
-  StatusBar,
   StyleSheet,
   View,
 } from 'react-native';
-import {
-  AppLoading,
-  Asset,
-  Font,
-  Icon,
-} from 'expo';
+import { AppLoading } from 'expo';
+import * as Icon from '@expo/vector-icons';
+import * as Font from 'expo-font';
 import handleError from './data/handleError';
 import AppNavigator from './navigation/AppNavigator';
 
@@ -26,11 +22,11 @@ export default class App extends React.Component {
   };
 
   loadResourcesAsync = async () => Promise.all([
-    Asset.loadAsync([
-      /* eslint-disable global-require */
-      require('./assets/icons/nav_home_active.png'),
-      require('./assets/icons/nav_cg_inactive.png'),
-    ]),
+    // Asset.loadAsync([
+    //   require('./assets/icons/nav_home_active.png'),
+    //   require('./assets/icons/nav_cg_inactive.png'),
+    // ]),
+    /* eslint-disable global-require */
     Font.loadAsync({
       ...Icon.Ionicons.font,
       circularLight: require('./assets/fonts/CircularAirPro-Light.otf'),

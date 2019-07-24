@@ -59,21 +59,21 @@ export const sunFeatures = {
   }
 };
 
-export const waterFeatures = {
+export const thirstinessFeatures = {
   'not thirsty': {
     text: 'Less Water',
     icon: lessWaterIcon,
-    detailKey: '',
+    detailKey: 'thirstinessDetails',
   },
   regular: {
     text: 'Regular Water',
     icon: regularWaterIcon,
-    detailKey: '',
+    detailKey: 'thirstinessDetails',
   },
   'very thirsty': {
     text: 'More Water',
     icon: moreWaterIcon,
-    detailKey: '',
+    detailKey: 'thirstinessDetails',
   },
 };
 
@@ -134,7 +134,7 @@ export const soilFeatures = {
 export const allFeatures = {
   lifespan: lifespanFeatures,
   sun: sunFeatures,
-  water: waterFeatures,
+  thirstiness: thirstinessFeatures,
   soil: soilFeatures,
   pet: petFeatures,
   frost: frostFeatures,

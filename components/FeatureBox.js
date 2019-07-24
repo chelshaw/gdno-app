@@ -11,7 +11,7 @@ import { space } from '../constants/Styles';
 import {
   lifespanFeatures,
   sunFeatures,
-  waterFeatures,
+  thirstinessFeatures,
   soilFeatures,
   petFeatures,
   frostFeatures,
@@ -46,8 +46,8 @@ const getContentForFeature = (type, val) => {
     case 'sun':
       options = sunFeatures;
       break;
-    case 'water':
-      options = waterFeatures;
+    case 'thirstiness':
+      options = thirstinessFeatures;
       break;
     case 'soil':
       options = soilFeatures;
@@ -90,7 +90,7 @@ const FeatureBlock = ({
 
 FeatureBlock.propTypes = {
   feature: PropTypes.string,
-  category: PropTypes.oneOf(['pet', 'frost', 'lifespan', 'sun', 'water', 'soil']).isRequired,
+  category: PropTypes.oneOf(['pet', 'frost', 'lifespan', 'sun', 'thirstiness', 'soil']).isRequired,
 };
 
 export default FeatureBlock;
