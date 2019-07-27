@@ -4,6 +4,8 @@ import {
   View,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import * as Icon from '@expo/vector-icons';
+
 import { Body } from './Type';
 import Touchable from './Touchable';
 import ThumbnailWithFallback from './ThumbnailWithFallback';
@@ -17,8 +19,12 @@ const ListItemWithImage = ({
   selected = false,
   added = false,
   onPress,
+  onRemove,
 }) => {
   const ss = StyleSheet.create({
+    outer: {
+      paddingHorizontal: space[1],
+    },
     item: {
       display: 'flex',
       flexDirection: 'row',
@@ -37,10 +43,17 @@ const ListItemWithImage = ({
     },
     indicator: {
       width: 50,
+    },
+    removeButton: {
+      paddingHorizontal: space[1],
+      paddingVertical: space[0],
     }
   });
   const handleOnPress = () => {
     onPress(item, selected);
+  };
+  const handleRemove = () => {
+    onRemove(item);
   };
 
   return (
@@ -69,6 +82,19 @@ const ListItemWithImage = ({
           <View style={ss.indicator}>
             <SelectIndicator selected={selected} />
           </View>
+          )
+        }
+        {onRemove
+          && (
+          <Touchable onPress={handleRemove}>
+            <View style={ss.removeButton}>
+              <Icon.Ionicons
+                name="ios-close"
+                size={24}
+                color={COLORS.gray}
+              />
+            </View>
+          </Touchable>
           )
         }
       </View>

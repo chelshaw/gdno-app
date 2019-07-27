@@ -34,6 +34,11 @@ export const getMultipleValues = async (keys) => {
   return values.map(v => JSON.parse(v[1]));
 };
 
+export const removeKeys = async (keys) => {
+  const gdnoKeys = keys.map(k => `@GDNO_${k}`);
+  AsyncStorage.multiRemove(gdnoKeys);
+};
+
 // FOR DEBUGGING
 /* eslint-disable no-unused-vars */
 const clearKeys = async () => {

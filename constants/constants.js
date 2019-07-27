@@ -12,6 +12,8 @@ const moreWaterIcon = require('../assets/icons/water_03.png');
 const bothPetIcon = require('../assets/icons/pet_bothfriendly.png');
 const catPetIcon = require('../assets/icons/pet_catfriendly.png');
 const dogPetIcon = require('../assets/icons/pet_dogfriendly.png');
+const leanSoilIcon = require('../assets/icons/soil_looselean.png');
+const fertileSoilIcon = require('../assets/icons/soil_looserich.png');
 
 const nonePetIcon = bothPetIcon;
 
@@ -121,12 +123,12 @@ export const frostFeatures = {
 export const soilFeatures = {
   'Lean, rocky soil': {
     text: 'Lean, rocky soil',
-    icon: placeholder,
+    icon: leanSoilIcon,
     detailKey: 'soilDetails',
   },
   'Loose, fertile soil': {
     text: 'Loose, fertile soil',
-    icon: placeholder,
+    icon: fertileSoilIcon,
     detailKey: 'soilDetails',
   }
 };

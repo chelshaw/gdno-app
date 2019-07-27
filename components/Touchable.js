@@ -12,10 +12,9 @@ const Touchable = ({
   onPress,
   disabled = false,
   children,
-  returnKey,
   navigation,
 }) => {
-  let handlePress = () => onPress(returnKey);
+  let handlePress = onPress;
   if (typeof onPress === 'string') {
     handlePress = () => navigation.navigate(onPress);
   }
@@ -42,7 +41,6 @@ Touchable.propTypes = {
   children: PropTypes.node.isRequired,
   accessibilityLabel: PropTypes.string,
   disabled: PropTypes.bool,
-  returnKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   navigation: PropTypes.object.isRequired,
 };
 

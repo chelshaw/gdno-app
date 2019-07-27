@@ -1,7 +1,9 @@
 import { AsyncStorage } from 'react-native';
 import handleError from './handleError';
 import { performGet, performMultipleGet } from './restful';
-import { getMultipleValues, getValue, setValue } from './localStorage';
+import {
+  getMultipleValues, getValue, setValue, removeKeys,
+} from './localStorage';
 import { keyifyName } from '../constants/constants';
 
 const airtableUrl = '';
@@ -93,6 +95,18 @@ export const getAndSavePlantsToStorage = async (plantIds) => {
     throw (e);
   }
   return savePlantsToStorage(results);
+};
+
+export const removePlantsByName = async (plantNames) => {
+  const names = plantNames.map(name => keyifyName(name));
+  let success;
+  try {
+    success = await removeKeys(names);
+  } catch (e) {
+    handleError(e);
+    throw (e);
+  }
+  return success;
 };
 
 export default getPlantData;

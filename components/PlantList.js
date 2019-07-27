@@ -8,6 +8,7 @@ import ListItemWithImage from './ListItemWithImage';
 const PlantList = ({
   plants,
   onPress = () => {},
+  onRemove,
   selectable = false,
   selectedList = [],
   addedList = [],
@@ -28,6 +29,7 @@ const PlantList = ({
           item={item}
           selectable={selectable}
           onPress={handleOnPress}
+          onRemove={typeof onRemove === 'function' ? onRemove : undefined}
           added={addedList.indexOf(item.id) >= 0}
           selected={selectable && selectedList.indexOf(item.id) >= 0}
         />
@@ -45,6 +47,7 @@ PlantList.propTypes = {
     imageUrl: PropTypes.string,
   })).isRequired,
   onPress: PropTypes.func,
+  onRemove: PropTypes.func,
   selectable: PropTypes.bool,
   selectedList: PropTypes.arrayOf(PropTypes.string),
   addedList: PropTypes.arrayOf(PropTypes.string),

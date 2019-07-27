@@ -3,13 +3,14 @@ import {
   StyleSheet,
   View,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 
 /* CONSTANTS */
 import { navigation } from '../constants/propShapes';
 import { space, centered, padded } from '../constants/Styles';
 import COLORS from '../constants/Colors';
-import getPlantData, { loadStoredPlants, getAndSavePlantsToStorage } from '../data/plantData';
+import getPlantData, { loadStoredPlants, getAndSavePlantsToStorage, removePlantsByName } from '../data/plantData';
 /* COMPONENTS */
 import { Header, SectionTitle } from '../components/Type';
 import CareGuideEmptyState from '../components/CareGuideEmptyState';
@@ -31,7 +32,6 @@ const styles = StyleSheet.create({
   },
   savedPlants: {
     flex: 1,
-    paddingHorizontal: space[2],
   },
   centered,
   padded,
@@ -54,6 +54,31 @@ class CareGuidesScreen extends React.Component {
 
   componentDidMount() {
     this.loadPlants();
+  }
+
+  handleConfirmDelete = (plantName) => {
+    removePlantsByName([plantName])
+      .then(() => {
+        this.loadPlants();
+      })
+      .catch(() => {
+        this.setState({ error: true });
+      });
+  }
+
+  handlePlantRemove = (plant) => {
+    Alert.alert(
+      `Remove ${plant.Herb}?`,
+      'If you delete this care guide you can always add it back later.',
+      [
+        {
+          text: 'Nevermind',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        { text: 'Yes', onPress: () => this.handleConfirmDelete(plant.Herb) },
+      ],
+    );
   }
 
   handlePlantSelect = (plant) => {
@@ -179,10 +204,12 @@ class CareGuidesScreen extends React.Component {
             )
         }
         </StandardModal>
-        <View style={[styles.savedPlants]}>
+        <View style={styles.savedPlants}>
           <PlantList
+            style={{ paddingHorizontal: space[2] }}
             plants={savedPlants}
             onPress={this.handlePlantPress}
+            onRemove={this.handlePlantRemove}
           />
         </View>
         <View style={styles.padded}>
